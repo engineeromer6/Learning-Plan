@@ -41,7 +41,7 @@ body.light {
   --shadow-lg: 0 14px 56px rgba(0,0,0,.14);
   color-scheme: light;
 }
-
+ 
 /* ══════════════════════════════════════
    RESET & BASE
 ══════════════════════════════════════ */
@@ -54,7 +54,7 @@ body{
   color:var(--text);background:var(--bg);
   overflow-x:hidden;transition:background .25s,color .25s;
 }
-
+ 
 /* ══════════════════════════════════════
    THEME TOGGLE BUTTON
 ══════════════════════════════════════ */
@@ -69,12 +69,12 @@ body{
 }
 #theme-btn:hover{color:var(--text);background:var(--surface-2);}
 #theme-btn:active{transform:scale(.9);}
-
+ 
 /* ══════════════════════════════════════
    LAYOUT
 ══════════════════════════════════════ */
 .page{max-width:860px;margin:0 auto;padding:56px 20px 80px;}
-
+ 
 /* ══════════════════════════════════════
    HEADER
 ══════════════════════════════════════ */
@@ -85,7 +85,7 @@ body{
   letter-spacing:-1px;color:var(--text);margin-bottom:8px;
 }
 .sub-title{font-size:clamp(13px,2vw,15px);color:var(--text-2);font-weight:400;}
-
+ 
 /* ══════════════════════════════════════
    STATS
 ══════════════════════════════════════ */
@@ -97,7 +97,7 @@ body{
 }
 .sv{font-size:clamp(18px,3.5vw,24px);font-weight:700;color:var(--text);line-height:1;}
 .sl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-3);margin-top:5px;}
-
+ 
 /* ══════════════════════════════════════
    PROGRESS
 ══════════════════════════════════════ */
@@ -109,7 +109,7 @@ body{
 .prog-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-2);margin-bottom:10px;}
 .prog-track{height:4px;background:var(--border-hi);border-radius:2px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:2px;background:var(--prog-bg);transition:width .5s cubic-bezier(.4,0,.2,1);}
-
+ 
 /* ══════════════════════════════════════
    COST BOX
 ══════════════════════════════════════ */
@@ -135,7 +135,7 @@ body{
 .cost-total{font-size:12px;color:var(--text-3);padding-top:10px;border-top:1px solid var(--border);}
 .cost-total strong{color:var(--text);}
 .free-hi{color:#6ee7b7;}
-
+ 
 /* ══════════════════════════════════════
    FILTER PILLS
 ══════════════════════════════════════ */
@@ -152,7 +152,7 @@ body{
 .pill:hover{background:var(--surface-2);color:var(--text);}
 .pill:active{transform:scale(.93);transition:transform .07s;}
 .pill.active{background:var(--text);color:var(--bg);border-color:var(--text);}
-
+ 
 /* ══════════════════════════════════════
    WEEK CARDS
 ══════════════════════════════════════ */
@@ -166,7 +166,7 @@ body{
 .week-card.hidden{display:none;}
 .week-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
 .week-card.open{box-shadow:var(--shadow-md);border-color:var(--border-hi);}
-
+ 
 .week-head{
   display:flex;align-items:center;gap:14px;padding:16px 20px;
   cursor:pointer;user-select:none;
@@ -194,7 +194,7 @@ body{
 }
 .wchev{font-size:10px;color:var(--text-3);flex-shrink:0;transition:transform .22s cubic-bezier(.4,0,.2,1);}
 .week-card.open .wchev{transform:rotate(90deg);}
-
+ 
 /* expanded body */
 .wbody{display:none;border-top:1px solid var(--border);}
 .week-card.open .wbody{display:block;}
@@ -204,7 +204,7 @@ body{
   background:var(--surface-2);font-size:13px;color:var(--text-2);line-height:1.7;
 }
 .glabel{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pc,#6366f1);margin-bottom:4px;}
-
+ 
 /* ══════════════════════════════════════
    TABS
 ══════════════════════════════════════ */
@@ -220,7 +220,7 @@ body{
 .tbtn.active{color:var(--text);border-bottom-color:var(--pc,#6366f1);}
 .tcontent{display:none;padding:16px 20px 22px;}
 .tcontent.active{display:block;}
-
+ 
 /* ══════════════════════════════════════
    RESOURCES
 ══════════════════════════════════════ */
@@ -240,14 +240,14 @@ body{
 .rname{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;}
 .rauthor{font-size:11px;color:var(--text-3);font-style:italic;margin-top:2px;}
 .rdesc{font-size:12px;color:var(--text-2);margin-top:3px;line-height:1.5;}
-
+ 
 .pdf-strip{
   padding:10px 15px;background:var(--surface-3);border-top:1px solid var(--border);
   display:flex;align-items:center;gap:8px;flex-wrap:wrap;
 }
 .pdf-label{font-size:12px;color:var(--text-3);}
 .pdf-fname{font-size:12px;color:var(--text-2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
+ 
 .psec{margin-top:16px;}
 .slabel{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:8px;}
 .pitem{
@@ -265,7 +265,7 @@ body{
   transition:background .15s,border-color .15s;
 }
 .plink:hover{background:var(--surface-2);border-color:var(--pc,#6366f1);}
-
+ 
 /* ══════════════════════════════════════
    BUTTONS & GROUPS
 ══════════════════════════════════════ */
@@ -285,14 +285,14 @@ body{
 .btn-g:hover{background:var(--surface-2);color:var(--text);}
 .btn-d{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.25);color:#fca5a5;}
 .btn-d:hover{background:rgba(239,68,68,.18);}
-
+ 
 .btn-group{
   display:inline-flex;align-items:center;gap:5px;
   background:var(--surface-3);border:1px solid var(--border-hi);
   border-radius:999px;padding:4px;
 }
 .btn-group .btn{min-height:32px;padding:5px 14px;font-size:11px;}
-
+ 
 /* ══════════════════════════════════════
    LINKS TAB
 ══════════════════════════════════════ */
@@ -308,7 +308,7 @@ body{
 .lname{font-size:13px;color:var(--text);display:flex;align-items:center;gap:9px;}
 .larrow{color:var(--pc,#6366f1);font-size:13px;}
 .ldomain{font-family:'Courier New',monospace;font-size:10px;color:var(--text-3);}
-
+ 
 /* ══════════════════════════════════════
    NOTES
 ══════════════════════════════════════ */
@@ -324,7 +324,7 @@ body{
 .narea::placeholder{color:var(--text-3);font-style:italic;}
 .narea:focus{border-color:var(--pc,#6366f1);box-shadow:0 0 0 3px rgba(99,102,241,.1);}
 .nact{display:flex;justify-content:flex-end;margin-top:8px;}
-
+ 
 /* ══════════════════════════════════════
    LEVEL CHECK
 ══════════════════════════════════════ */
@@ -365,7 +365,7 @@ body{
   background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.2);
   color:#6ee7b7;font-size:12px;text-align:center;font-style:italic;
 }
-
+ 
 /* ── CHECKBOX BOUNCE ── */
 @keyframes ck-pop{
   0%  {transform:scale(1);}
@@ -375,7 +375,7 @@ body{
   100%{transform:scale(1);}
 }
 .ckbox.pop{animation:ck-pop .35s cubic-bezier(.4,0,.2,1) forwards;}
-
+ 
 /* ══════════════════════════════════════
    FOOTER
 ══════════════════════════════════════ */
@@ -384,7 +384,7 @@ body{
   display:flex;justify-content:space-between;font-size:11px;
   color:var(--text-3);flex-wrap:wrap;gap:8px;letter-spacing:.5px;
 }
-
+ 
 /* ══════════════════════════════════════
    MOBILE — BOTTOM NAV
 ══════════════════════════════════════ */
@@ -415,7 +415,7 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
 }
 .mnav-pill:active{transform:scale(.93);transition:transform .07s cubic-bezier(.4,0,.2,1);}
 .mnav-pill.active{background:var(--text);color:var(--bg);border-color:var(--text);}
-
+ 
 /* ══════════════════════════════════════
    TOAST
 ══════════════════════════════════════ */
@@ -432,7 +432,7 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
   color:#a7f3d0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
   box-shadow:0 4px 20px rgba(0,0,0,.3);
 }
-
+ 
 /* ══════════════════════════════════════
    SHEET OVERLAY
 ══════════════════════════════════════ */
@@ -440,7 +440,7 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
   position:fixed;inset:0;z-index:200;
   background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
 }
-
+ 
 /* ══════════════════════════════════════
    BOTTOM SHEET
 ══════════════════════════════════════ */
@@ -457,7 +457,7 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
   display:flex;justify-content:center;touch-action:none;cursor:grab;
 }
 .sh-handle-bar{width:40px;height:5px;border-radius:3px;background:var(--border-hi);}
-
+ 
 .sh-sticky{
   flex-shrink:0;padding:8px 20px 14px;
   border-bottom:1px solid var(--border);
@@ -467,22 +467,22 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
 .sh-wmeta{flex:1;min-width:0;}
 .sh-wtitle{font-size:15px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;}
 .sh-wsub{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--text-3);margin-top:3px;}
-
+ 
 .sh-tbar{
   flex-shrink:0;display:flex;padding:0 4px;
   border-bottom:1px solid var(--border);
 }
 .sh-tbar .tbtn{flex:1;text-align:center;padding:11px 4px;min-height:46px;font-size:10px;}
-
+ 
 .sh-body{
   flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
   overscroll-behavior:contain;padding:16px 18px 28px;
 }
-
+ 
 .tab-dots{display:flex;justify-content:center;gap:7px;padding:18px 0 4px;}
 .tab-dot{height:5px;width:5px;border-radius:3px;background:var(--border-hi);transition:all .25s cubic-bezier(.4,0,.2,1);}
 .tab-dot.active{width:20px;background:var(--pc,#6366f1);}
-
+ 
 /* ══════════════════════════════════════
    MOBILE OVERRIDES
 ══════════════════════════════════════ */
@@ -508,20 +508,20 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
   .tcontent{padding:14px 16px 20px;}
   .wgoal{margin:14px 16px 0;}
 }
-
+ 
 @media(min-width:768px){
   #theme-btn{top:22px;right:22px;}
 }
 </style>
 </head>
 <body>
-
+ 
 <button id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark mode">&#9790;</button>
 <div class="page" id="app"></div>
 <div id="sheet-root"></div>
 <div id="mobile-nav"></div>
 <div id="toast"><div class="toast-inner" id="toast-text"></div></div>
-
+ 
 <script>
 /* ══════════════════════════════════════
    PHASE DATA
@@ -538,7 +538,7 @@ const PHASES=[
   {id:9, label:'ZKPs',           color:'#a78bfa'},
   {id:10,label:'Formal & PKI',   color:'#6ee7b7'},
 ];
-
+ 
 /* ══════════════════════════════════════
    WEEK DATA
 ══════════════════════════════════════ */
@@ -555,7 +555,7 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Introduction module — first 5 puzzles: encoding, XOR',link:'https://cryptohack.org'}],
    checks:['Can you explain Caesar, Vigenère, and one-time pad ciphers from memory?','Can you compute a modular inverse by hand (e.g. 3 mod 7)?','Did you complete the first 5 CryptoHack Introduction puzzles?']},
-
+ 
   {week:2,phase:1,title:'Mathematical & Historical Foundations II',hours:8,
    goal:'Master number theory — modular arithmetic, GCD, Euler\'s theorem — as the foundation for all public-key cryptography.',
    resources:[
@@ -569,7 +569,7 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Math module — all modular arithmetic puzzles',link:'https://cryptohack.org'}],
    checks:['Can you state and apply Euler\'s theorem (a^φ(n) ≡ 1 mod n)?','Can you run the Extended Euclidean Algorithm to find a modular inverse?','Did you finish all CryptoHack Math module puzzles?']},
-
+ 
   {week:3,phase:2,title:'Symmetric-Key I — Block Ciphers & AES',hours:9,
    goal:'Understand the internals of AES and why encryption mode choice is a security-critical decision.',
    resources:[
@@ -583,7 +583,7 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Symmetric Cryptography module — AES ECB challenges',link:'https://cryptohack.org'}],
    checks:['Can you describe all four AES round operations from memory?','Can you explain why AES-ECB leaks patterns with a concrete example?','Did you solve at least three CryptoHack AES ECB challenges?']},
-
+ 
   {week:4,phase:2,title:'Symmetric-Key II — Modes & Authenticated Encryption',hours:9,
    goal:'Learn to choose the right encryption mode and understand why unauthenticated encryption is insufficient.',
    resources:[
@@ -600,7 +600,7 @@ const W=[
      {source:'Coursera',task:'Weeks 1–2 graded quizzes and programming assignments',link:'https://coursera.org'},
    ],
    checks:['Can you explain why CBC is malleable and how a bit-flipping attack works?','Can you define IND-CPA and give an example cipher that fails it?','Can you explain why GCM provides both confidentiality and authenticity?']},
-
+ 
   {week:5,phase:2,title:'Symmetric-Key III — Boneh Deep Dive',hours:10,
    goal:'Complete the symmetric foundation with rigorous security definitions: IND-CPA and IND-CCA.',
    resources:[
@@ -615,7 +615,7 @@ const W=[
      {source:'CryptoHack',task:'Complete remaining Symmetric Cryptography challenges',link:'https://cryptohack.org'},
    ],
    checks:['Can you define IND-CCA and explain why a CPA-secure cipher can fail it?','Can you describe CBC-MAC and its length-extension vulnerability?','Did you complete all Coursera Weeks 3–4 graded assignments?']},
-
+ 
   {week:6,phase:3,title:'Asymmetric-Key I — RSA & Number Theory',hours:9,
    goal:'Implement RSA from scratch and understand the number-theoretic hardness that underpins it.',
    resources:[
@@ -628,7 +628,7 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'RSA module — first half: basic RSA, small exponent attacks',link:'https://cryptohack.org'}],
    checks:['Can you generate an RSA key pair by hand for small primes (e.g. p=61, q=53)?','Can you explain why e=3 with no padding is catastrophically insecure?','Can you describe two RSA attacks (Coppersmith, common modulus)?']},
-
+ 
   {week:7,phase:3,title:'Asymmetric-Key II — Diffie-Hellman & Discrete Log',hours:9,
    goal:'Understand the hardness assumption behind Diffie-Hellman and why the choice of group is critical.',
    resources:[
@@ -642,7 +642,7 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Diffie-Hellman module — small subgroup & MITM attacks',link:'https://cryptohack.org'}],
    checks:['Can you explain the Decisional Diffie-Hellman (DDH) assumption?','Can you describe a small subgroup confinement attack?','Can you distinguish FFDH from ECDH and say which is preferred today?']},
-
+ 
   {week:8,phase:3,title:'Asymmetric-Key III — Elliptic Curve Cryptography',hours:10,
    goal:'Implement point addition and scalar multiplication; understand the ECC vs. RSA key-size trade-off.',
    resources:[
@@ -657,7 +657,7 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Elliptic Curves module — all challenges',link:'https://cryptohack.org'}],
    checks:['Can you perform point addition and scalar multiplication on a small curve by hand?','Can you explain why ECDLP is harder than DLP for the same key size?','Can you describe an ECDSA signature generation and verification end-to-end?']},
-
+ 
   {week:9,phase:4,title:'Hashing & Integrity',hours:8,
    goal:'Understand the three hash security properties and why MD5 and SHA-1 are broken.',
    resources:[
@@ -675,7 +675,7 @@ const W=[
      {source:'DIY',task:'Implement SHA-256 from scratch in Python without any libraries',link:''},
    ],
    checks:['Can you distinguish collision resistance, second preimage resistance, and preimage resistance?','Can you explain Merkle-Damgård and its length-extension vulnerability?','Did you implement SHA-256 from scratch without referencing existing code?']},
-
+ 
   {week:10,phase:4,title:'Authentication — MAC, HMAC & Digital Signatures',hours:9,
    goal:'Distinguish encryption (confidentiality) from MACs (integrity and authenticity) — a foundational conceptual boundary.',
    resources:[
@@ -692,7 +692,7 @@ const W=[
      {source:'DIY',task:'Implement HMAC-SHA256 and verify a JWT manually in Python without a library',link:''},
    ],
    checks:['Can you explain why H(key||message) is broken but HMAC is not?','Can you describe HMAC\'s double-hashing construction and its security guarantee?','Can you verify an RS256-signed JWT manually in Python without a JWT library?']},
-
+ 
   {week:11,phase:5,title:'Applied Cryptography I — Real-World Patterns',hours:9,
    goal:'Bridge theory to code — learn which primitives to actually use in 2025+ applications.',
    resources:[
@@ -705,7 +705,7 @@ const W=[
    ],
    practice:[{source:'cryptography.io',task:'Implement AES-GCM encryption and HMAC verification in Python',link:'https://cryptography.io'}],
    checks:['Can you implement AES-GCM encrypt/decrypt with proper nonce handling in Python?','Can you explain the difference between Fernet and raw AES-GCM (hazmat)?','Can you identify three common cryptographic misuse patterns in real-world code?']},
-
+ 
   {week:12,phase:5,title:'Applied Cryptography II — TLS & Protocols',hours:9,
    goal:'Trace the exact cryptographic operations in a TLS 1.3 handshake, byte by byte.',
    resources:[
@@ -718,7 +718,7 @@ const W=[
    ],
    practice:[{source:'DIY',task:'Trace a TLS 1.3 handshake in Wireshark; label each flight with its crypto operation',link:''}],
    checks:['Can you list the full TLS 1.3 message sequence from Client Hello to Finished?','Can you explain what 0-RTT data is and its security trade-off?','Can you identify which cipher suite components handle key exchange, auth, and AEAD?']},
-
+ 
   {week:13,phase:5,title:'Applied Cryptography III — Secure Implementation',hours:8,
    goal:'Write production-grade cryptographic code using correct APIs — no raw ECB, no fixed nonces.',
    resources:[
@@ -734,7 +734,7 @@ const W=[
      {source:'DIY',task:'Implement a minimal Certificate Authority with a self-signed chain',link:''},
    ],
    checks:['Can you build an encrypt-then-sign pipeline with proper error handling?','Can you create a self-signed X.509 certificate and verify it programmatically?','Can you audit a code snippet and identify at least two cryptographic flaws?']},
-
+ 
   {week:14,phase:6,title:'Cryptanalysis I — Breaking Classical & ECB',hours:10,
    goal:'Shift your mindset from builder to attacker — learn to detect and exploit ECB mode and fixed-key XOR.',
    resources:[
@@ -748,7 +748,7 @@ const W=[
    ],
    practice:[{source:'Cryptopals',task:'Complete all 8 challenges in Set 1 and all 8 in Set 2',link:'https://cryptopals.com'}],
    checks:['Did you break repeating-key XOR (challenge 6) independently without hints?','Can you explain how to detect AES-ECB from a ciphertext corpus without the key?','Did you implement and exploit the PKCS#7 padding oracle in Set 2?']},
-
+ 
   {week:15,phase:6,title:'Cryptanalysis II — Padding Oracles & Stream Cipher Reuse',hours:10,
    goal:'Execute a CBC padding oracle attack and a hash length-extension attack from scratch.',
    resources:[
@@ -762,7 +762,7 @@ const W=[
    ],
    practice:[{source:'Cryptopals',task:'Complete all Set 3 challenges (padding oracle is the landmark) and all of Set 4',link:'https://cryptopals.com'}],
    checks:['Can you execute a full CBC padding oracle attack to decrypt an unknown ciphertext?','Can you exploit CTR nonce reuse to recover two plaintext streams?','Can you perform a SHA-1 hash length-extension attack end-to-end?']},
-
+ 
   {week:16,phase:6,title:'Cryptanalysis III — RSA & DH Attacks',hours:10,
    goal:'Break RSA with a parity oracle and understand why protocol logic flaws undermine sound primitives.',
    resources:[
@@ -776,7 +776,7 @@ const W=[
    ],
    practice:[{source:'Cryptopals',task:'Complete Set 5 (DH MITM) and as much of Set 6 as possible',link:'https://cryptopals.com'}],
    checks:['Can you mount a DH MITM attack by injecting g=1 or g=p as the parameter?','Can you use an RSA parity oracle to decrypt a ciphertext bit-by-bit?','Can you describe how Bleichenbacher\'s attack works at a conceptual level?']},
-
+ 
   {week:17,phase:7,title:'Implementation Security — Timing, RNG & Nonce Misuse',hours:9,
    goal:'Understand that a correct algorithm, incorrectly implemented, is just as broken as a weak one.',
    resources:[
@@ -791,7 +791,7 @@ const W=[
      {source:'DIY',task:'Audit a student-written AES implementation for the five most common misuse patterns',link:''},
    ],
    checks:['Can you write a timing-safe MAC comparison using hmac.compare_digest?','Can you explain nonce misuse resistance and name AEAD schemes that have it?','Can you list the top five cryptographic implementation mistakes from memory?']},
-
+ 
   {week:18,phase:7,title:'Implementation Security II & Formal Proofs Intro',hours:9,
    goal:'Begin reading formal security proofs and understand the security reduction paradigm.',
    resources:[
@@ -805,7 +805,7 @@ const W=[
    ],
    practice:[{source:'Coursera',task:'Cryptography II — Weeks 1–2 problem sets',link:'https://coursera.org'}],
    checks:['Can you read a game-based security proof and identify the challenger and adversary?','Can you explain what a security reduction is with a concrete example?','Did you complete the Cryptography II Weeks 1–2 problem sets?']},
-
+ 
   {week:19,phase:8,title:'Post-Quantum I — Lattice Mathematics',hours:9,
    goal:'Understand why lattice problems resist quantum attacks and grasp LWE as the foundation of Kyber.',
    resources:[
@@ -822,7 +822,7 @@ const W=[
      {source:'DIY',task:'Write a one-page summary of the CRYSTALS-Kyber algorithm specification',link:''},
    ],
    checks:['Can you define the LWE problem and state its hardness assumption?','Can you explain why lattice-based schemes resist quantum attacks, unlike RSA and ECC?','Did you implement a toy LWE encryption/decryption scheme from scratch?']},
-
+ 
   {week:20,phase:8,title:'Post-Quantum II — NIST Standards',hours:9,
    goal:'Know the three NIST-finalized PQC standards, their target security properties, and how to use them.',
    resources:[
@@ -839,7 +839,7 @@ const W=[
      {source:'DIY',task:'Run liboqs in Python: generate a Kyber key pair and complete a full KEM cycle',link:''},
    ],
    checks:['Can you name all three NIST-finalized PQC standards and their security categories?','Can you explain the difference between a KEM and PKE, and why Kyber is a KEM?','Did you run a working Kyber key encapsulation using the liboqs library?']},
-
+ 
   {week:21,phase:9,title:'Zero-Knowledge Proofs I — Foundations',hours:9,
    goal:'Explain the three ZKP properties and implement a Sigma protocol from scratch.',
    resources:[
@@ -856,7 +856,7 @@ const W=[
      {source:'DIY',task:'Implement a Schnorr identification proof (interactive) in Python',link:''},
    ],
    checks:['Can you explain completeness, soundness, and zero-knowledge using a non-technical analogy?','Can you implement a Schnorr Sigma protocol for proving knowledge of a discrete log?','Can you distinguish interactive and non-interactive ZK (Fiat-Shamir heuristic)?']},
-
+ 
   {week:22,phase:9,title:'Zero-Knowledge Proofs II — zk-SNARKs & Applications',hours:9,
    goal:'Understand SNARKs vs. STARKs and run a complete zk-SNARK circuit end-to-end.',
    resources:[
@@ -873,7 +873,7 @@ const W=[
      {source:'DIY',task:'Write and compile a basic circom circuit proving knowledge of a hash preimage',link:''},
    ],
    checks:['Can you explain what a QAP is and why it matters for SNARKs?','Can you describe Groth16\'s trusted setup requirement and its trust implications?','Did you compile and verify a circom circuit that proves a non-trivial ZK statement?']},
-
+ 
   {week:23,phase:10,title:'Formal Proofs & Security Reductions',hours:10,
    goal:'Read and write game-based security reductions; understand the Random Oracle Model.',
    resources:[
@@ -889,7 +889,7 @@ const W=[
      {source:'DIY',task:'Write a formal game-based security proof for a simple MAC construction',link:''},
    ],
    checks:['Can you read a formal security proof and identify the reduction\'s simulator?','Can you explain the Random Oracle Model vs. the standard model?','Can you write a game-based proof independently, without referencing an example?']},
-
+ 
   {week:24,phase:10,title:'Key Management, PKI & Capstone Project',hours:8,
    goal:'Synthesise all 24 weeks into a working system and understand the operational side of cryptography.',
    resources:[
@@ -906,13 +906,13 @@ const W=[
    ],
    checks:['Can you describe all five stages of a cryptographic key lifecycle?','Did you complete the capstone messaging system with key exchange, AEAD, and signatures?','Can you threat-model a production crypto system and identify three critical failure modes?']},
 ];
-
+ 
 /* ══════════════════════════════════════
    STATE & PERSISTENCE
 ══════════════════════════════════════ */
 const LS='cmp-v6', LSP='cmp-v6-pdfs';
 let S={expanded:null,filter:0,checks:{},notes:{},pdfs:{},tabs:{},costOpen:false,sheetWeek:null};
-
+ 
 function loadState(){
   try{const r=localStorage.getItem(LS);if(r)S={...S,...JSON.parse(r)};}catch(e){}
   try{const p=localStorage.getItem(LSP);if(p)S.pdfs=JSON.parse(p);}catch(e){}
@@ -921,7 +921,7 @@ function saveState(){
   try{const{pdfs,...r}=S;localStorage.setItem(LS,JSON.stringify(r));}catch(e){}
   try{localStorage.setItem(LSP,JSON.stringify(S.pdfs));}catch(e){}
 }
-
+ 
 /* ══════════════════════════════════════
    THEME
 ══════════════════════════════════════ */
@@ -941,7 +941,7 @@ function toggleTheme(){
   localStorage.setItem('cmp-theme',isDark?'dark':'light');
   applyTheme();
 }
-
+ 
 /* ══════════════════════════════════════
    MOBILE DETECTION
 ══════════════════════════════════════ */
@@ -950,14 +950,14 @@ window.addEventListener('resize',()=>{
   const was=isMobile;isMobile=window.innerWidth<768;
   if(was!==isMobile){S.sheetWeek=null;S.expanded=null;render();}
 },{passive:true});
-
+ 
 /* ══════════════════════════════════════
    HELPERS
 ══════════════════════════════════════ */
 PHASES.forEach(ph=>{ph.weeks=W.filter(w=>w.phase===ph.id).map(w=>w.week);});
 const phOf=n=>PHASES.find(p=>p.weeks.includes(n))||PHASES[0];
 const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-
+ 
 function getScore(wn){
   const w=W.find(x=>x.week===wn);if(!w)return{s:0,t:0};
   return{s:w.checks.reduce((a,_,i)=>a+(S.checks[`${wn}-${i}`]?1:0),0),t:w.checks.length};
@@ -971,7 +971,7 @@ function lvInfo(s,t){
   return        {l:'Mastered',    c:'#6ee7b7'};
 }
 const masteredCount=()=>W.filter(w=>{const{s,t}=getScore(w.week);return s===t&&t>0;}).length;
-
+ 
 function openPdf(bk){
   const pdf=S.pdfs[bk];if(!pdf)return;
   try{
@@ -985,7 +985,7 @@ function openPdf(bk){
     setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
   }catch(e){alert('Could not open PDF.\n'+e.message);}
 }
-
+ 
 /* ══════════════════════════════════════
    TOAST
 ══════════════════════════════════════ */
@@ -997,7 +997,7 @@ function showToast(msg){
   tx.textContent=msg;t.classList.add('show');
   clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2600);
 }
-
+ 
 /* ══════════════════════════════════════
    CONTENT RENDERERS
 ══════════════════════════════════════ */
@@ -1041,7 +1041,7 @@ function renderResources(w){
   return`<div class="rlist">${items}</div>
     <div class="psec"><div class="slabel">Practice & Exercises</div>${practice}</div>`;
 }
-
+ 
 function renderLinks(w){
   return`<div class="slabel" style="margin-bottom:10px">Free Links & References</div>
     <div class="llist">${w.links.map(l=>`
@@ -1050,7 +1050,7 @@ function renderLinks(w){
         <span class="ldomain">${l.url.replace('https://','').split('/')[0]}</span>
       </a>`).join('')}</div>`;
 }
-
+ 
 function renderNotes(w){
   const v=S.notes[w.week]||'';
   return`<div class="nhead"><div class="slabel">Personal Notes</div><span class="ncount">${v.length} chars</span></div>
@@ -1059,7 +1059,7 @@ function renderNotes(w){
       oninput="saveNote(${w.week},this.value)">${esc(v)}</textarea>
     ${v?`<div class="nact"><div class="btn-group"><button class="btn btn-g" onclick="clearNote(${w.week})">Clear notes</button></div></div>`:''}`;
 }
-
+ 
 function renderLevel(w){
   const{s,t}=getScore(w.week),info=lvInfo(s,t),done=s===t&&t>0;
   return`<div class="lvbadge">
@@ -1077,7 +1077,7 @@ function renderLevel(w){
   }).join('')}</div>
   ${done?`<div class="mastered-note">Week ${w.week} complete — ready to advance.</div>`:''}`;
 }
-
+ 
 const TAB_ORDER=['resources','links','notes','level'];
 const TAB_LABELS=['Resources','Links','Notes','Level'];
 function tabContent(w,tab){
@@ -1087,7 +1087,7 @@ function tabContent(w,tab){
   if(tab==='level')return renderLevel(w);
   return'';
 }
-
+ 
 /* ══════════════════════════════════════
    DESKTOP RENDER
 ══════════════════════════════════════ */
@@ -1122,7 +1122,7 @@ function renderCard(w){
     </div>`:''}
   </div>`;
 }
-
+ 
 function render(){
   const m=masteredCount(),h=W.reduce((a,w)=>a+w.hours,0);
   document.getElementById('app').innerHTML=`
@@ -1166,7 +1166,7 @@ function render(){
     </div>`;
   if(isMobile)renderMobileNav();
 }
-
+ 
 /* ══════════════════════════════════════
    MOBILE NAV — initial render only
 ══════════════════════════════════════ */
@@ -1177,7 +1177,7 @@ function renderMobileNav(){
       ${PHASES.map(p=>`<button class="mnav-pill ${S.filter===p.id?'active':''}" data-id="${p.id}" onclick="setFilter(${p.id})">${p.label}</button>`).join('')}
     </div>`;
 }
-
+ 
 /* ══════════════════════════════════════
    SHEET RENDER
 ══════════════════════════════════════ */
@@ -1206,7 +1206,7 @@ function renderSheet(animate){
         <div class="tab-dots">${TAB_ORDER.map(id=>`<div class="tab-dot ${tab===id?'active':''}"></div>`).join('')}</div>
       </div>
     </div>`;
-
+ 
   if(animate){
     const sh=document.getElementById('ms');
     if(sh){
@@ -1220,7 +1220,7 @@ function renderSheet(animate){
   }
   requestAnimationFrame(()=>attachGestures());
 }
-
+ 
 function updateSheetBody(){
   const body=document.getElementById('sh-body');
   if(!body||!S.sheetWeek)return;
@@ -1232,7 +1232,7 @@ function updateSheetBody(){
     <div class="tab-dots">${TAB_ORDER.map(id=>`<div class="tab-dot ${tab===id?'active':''}"></div>`).join('')}</div>`;
   body.scrollTop=0;
 }
-
+ 
 /* ══════════════════════════════════════
    UNIFIED GESTURE SYSTEM — NO DIAGONALS
    Single state machine; one direction per touch session.
@@ -1243,10 +1243,10 @@ function attachGestures(){
   const sh=document.getElementById('ms');
   const body=document.getElementById('sh-body');
   if(!sh||!body)return;
-
+ 
   /* g.dir: 'idle' → 'deciding' → 'v' (vertical) | 'h' (horizontal) */
   let g={dir:'idle',sx:0,sy:0,dy:0};
-
+ 
   sh.addEventListener('touchstart',e=>{
     g.dir='deciding';
     g.sx=e.touches[0].clientX;
@@ -1254,12 +1254,12 @@ function attachGestures(){
     g.dy=0;
     sh.style.transition='none';
   },{passive:true});
-
+ 
   sh.addEventListener('touchmove',e=>{
     if(g.dir==='idle')return;
     const dx=e.touches[0].clientX-g.sx;
     const dy=e.touches[0].clientY-g.sy;
-
+ 
     /* — Direction lock: decide on first 10px of movement — */
     if(g.dir==='deciding'){
       if(Math.abs(dx)>10||Math.abs(dy)>10){
@@ -1268,12 +1268,12 @@ function attachGestures(){
       }
       return;
     }
-
+ 
     /* — HORIZONTAL: swipe tabs — */
     if(g.dir==='h'){
       e.preventDefault(); /* block scroll */
     }
-
+ 
     /* — VERTICAL: pull-to-close only when at scroll top AND dragging down — */
     if(g.dir==='v'){
       if(body.scrollTop<=0 && dy>0){
@@ -1285,7 +1285,7 @@ function attachGestures(){
       /* else: let native scroll run — do NOT preventDefault */
     }
   },{passive:false});
-
+ 
   sh.addEventListener('touchend',e=>{
     if(g.dir==='h'){
       const dx=e.changedTouches[0].clientX-g.sx;
@@ -1296,7 +1296,7 @@ function attachGestures(){
         else if(dx>0&&idx>0) mSwitchTab(S.sheetWeek,TAB_ORDER[idx-1]);
       }
     }
-
+ 
     if(g.dir==='v' && g.dy>0){
       sh.style.transition='transform .33s cubic-bezier(.4,0,.2,1)';
       if(g.dy>75){
@@ -1310,11 +1310,11 @@ function attachGestures(){
       /* ensure sheet stays in place if we never triggered pull */
       sh.style.transform='translateY(0)';
     }
-
+ 
     g.dir='idle';
   },{passive:true});
 }
-
+ 
 /* ══════════════════════════════════════
    ACTIONS
 ══════════════════════════════════════ */
@@ -1325,50 +1325,50 @@ function toggleWeek(n){
   saveState();render();
   if(S.expanded===n) setTimeout(()=>document.getElementById('wc-'+n)?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 }
-
+ 
 function switchTab(wn,t){S.tabs[wn]=t;saveState();render();}
-
+ 
 function mSwitchTab(wn,t){
   S.tabs[wn]=t;saveState();
   document.querySelectorAll('#sh-tbar .tbtn').forEach((btn,i)=>btn.classList.toggle('active',TAB_ORDER[i]===t));
   updateSheetBody();
 }
-
+ 
 function openSheet(wn){
   if(!S.tabs[wn])S.tabs[wn]='resources';
   S.sheetWeek=wn;saveState();renderSheet(true);
 }
-
+ 
 function closeSheet(){
   S.sheetWeek=null;saveState();
   document.getElementById('sheet-root').innerHTML='';
   render();
 }
-
+ 
 /* ── FIX: setFilter does NOT re-render nav → no scroll jump ── */
 function setFilter(id){
   S.filter=id;saveState();
-
+ 
   /* Update pill active states in-place — no scroll reset */
   document.querySelectorAll('[data-id]').forEach(el=>{
     el.classList.toggle('active',+el.dataset.id===id);
   });
-
+ 
   /* Show/hide cards in-place */
   document.querySelectorAll('.week-card[data-phase]').forEach(card=>{
     const ph=+card.dataset.phase;
     card.classList.toggle('hidden',id!==0&&ph!==id);
   });
 }
-
+ 
 function toggleCost(){S.costOpen=!S.costOpen;saveState();render();}
-
+ 
 /* ── FIX: mastered note synced with actual check state ── */
 function toggleCheck(wn,qi){
   const key=`${wn}-${qi}`;
   S.checks[key]=!S.checks[key];
   saveState();
-
+ 
   if(isMobile&&S.sheetWeek===wn){
     /* 1. Toggle check item class */
     const item=document.querySelector(`[data-wn="${wn}"][data-qi="${qi}"]`);
@@ -1386,7 +1386,7 @@ function toggleCheck(wn,qi){
     if(ln){ln.textContent=info.l;ln.style.color=info.c;}
     if(lf)lf.innerHTML=`${s}<small>/${t}</small>`;
     if(lb){lb.style.width=`${t?s/t*100:0}%`;lb.style.background=info.c;}
-
+ 
     /* 3. ── FIX: mastered note appears AND disappears reactively ── */
     const done=s===t&&t>0;
     const existing=document.querySelector('.mastered-note');
@@ -1399,7 +1399,7 @@ function toggleCheck(wn,qi){
     }else if(!done&&existing){
       existing.remove();
     }
-
+ 
     /* 4. Update list card + progress bar */
     updateCardInList(wn);
     updateProgressBar();
@@ -1407,7 +1407,7 @@ function toggleCheck(wn,qi){
     render();
   }
 }
-
+ 
 function saveNote(wn,v){
   S.notes[wn]=v;saveState();
   const c=document.querySelector('.ncount');if(c)c.textContent=v.length+' chars';
@@ -1428,7 +1428,7 @@ function removePdf(bk){
   delete S.pdfs[bk];saveState();
   if(isMobile&&S.sheetWeek)updateSheetBody();else render();
 }
-
+ 
 function updateCardInList(wn){
   const el=document.getElementById('wc-'+wn);if(!el)return;
   const w=W.find(x=>x.week===wn);
@@ -1444,7 +1444,7 @@ function updateProgressBar(){
   if(pct)pct.textContent=`${Math.round(m/24*100)}%`;
   if(sv)sv.textContent=`${m}/24`;
 }
-
+ 
 /* ══════════════════════════════════════
    BOOT
 ══════════════════════════════════════ */
@@ -1454,3 +1454,4 @@ render();
 </script>
 </body>
 </html>
+ 
