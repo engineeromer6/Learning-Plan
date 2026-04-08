@@ -75,11 +75,6 @@ body{
 ══════════════════════════════════════ */
 .page{max-width:860px;margin:0 auto;padding:56px 20px 80px;}
 
-/* YENİ EKLENEN SOL MENÜ - SAĞ İÇERİK MİMARİSİ */
-.layout-wrapper { display: flex; gap: 24px; align-items: flex-start; }
-.left-sidebar { position: sticky; top: 24px; flex-shrink: 0; width: 170px; }
-.main-content { flex: 1; min-width: 0; }
-
 /* ══════════════════════════════════════
    HEADER
 ══════════════════════════════════════ */
@@ -92,9 +87,9 @@ body{
 .sub-title{font-size:clamp(13px,2vw,15px);color:var(--text-2);font-weight:400;}
 
 /* ══════════════════════════════════════
-   STATS (DÜZENLENDİ - ARTIK 1FR)
+   STATS
 ══════════════════════════════════════ */
-.stats-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:12px;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
 .stat-card{
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--r-card);padding:16px 14px;text-align:center;
@@ -489,18 +484,12 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
 .tab-dot.active{width:20px;background:var(--pc,#6366f1);}
 
 /* ══════════════════════════════════════
-   MOBILE OVERRIDES (RESPONSIVE DÜZELTMELER)
+   MOBILE OVERRIDES
 ══════════════════════════════════════ */
 @media(max-width:767px){
   #mobile-nav{display:block;}
   .filter-wrap{display:none;}
   .page{padding:32px 14px calc(88px + env(safe-area-inset-bottom,0));}
-  
-  /* YENİ: Mobilde layout'u iptal edip eski düzene çevirme */
-  .layout-wrapper { flex-direction: column; gap: 0; }
-  .left-sidebar { position: static; width: 100%; margin-bottom: 12px; }
-  .stats-grid { grid-template-columns: repeat(2,1fr); margin-bottom: 0; }
-  
   .header{padding-right:56px;}
   .week-head{padding:16px 16px;min-height:72px;}
   .week-card:hover{transform:none;box-shadow:var(--shadow-sm);}
@@ -513,6 +502,7 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
   .pdf-strip{padding:11px 15px;gap:10px;}
   .btn{min-height:42px;padding:9px 20px;font-size:12px;}
   .narea{font-size:16px;min-height:160px;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
   .cost-grid{grid-template-columns:1fr;}
   .tbar{margin:12px 16px 0;}
   .tcontent{padding:14px 16px 20px;}
@@ -1099,7 +1089,7 @@ function tabContent(w,tab){
 }
 
 /* ══════════════════════════════════════
-   DESKTOP RENDER - (YENİ LAYOUT GÜNCELLEMESİ İLE)
+   DESKTOP RENDER
 ══════════════════════════════════════ */
 function renderCard(w){
   const ph=phOf(w.week),{s,t}=getScore(w.week),info=lvInfo(s,t);
@@ -1141,46 +1131,38 @@ function render(){
       <h1 class="main-title">Cryptography<br>Mastery Plan</h1>
       <p class="sub-title">Mid-Level to Advanced — from classical ciphers to post-quantum standards.</p>
     </div>
-    
-    <div class="layout-wrapper">
-      <div class="left-sidebar">
-        <div class="stats-grid">
-          ${[['24','Weeks'],[h+'h','Study Hours'],['$283','Books (max)'],[m+'/24','Mastered']].map(([v,l])=>
-            `<div class="stat-card"><div class="sv">${v}</div><div class="sl">${l}</div></div>`).join('')}
-        </div>
+    <div class="stats-grid">
+      ${[['24','Weeks'],[h+'h','Study Hours'],['$283','Books (max)'],[m+'/24','Mastered']].map(([v,l])=>
+        `<div class="stat-card"><div class="sv">${v}</div><div class="sl">${l}</div></div>`).join('')}
+    </div>
+    <div class="prog-card">
+      <div class="prog-meta"><span>Overall Progress</span><span>${Math.round(m/24*100)}%</span></div>
+      <div class="prog-track"><div class="prog-fill" style="width:${m/24*100}%"></div></div>
+    </div>
+    <div class="cost-card">
+      <div class="cost-head" onclick="toggleCost()">
+        <span class="cost-head-label">Cost Overview</span>
+        <span class="cost-icon ${S.costOpen?'open':''}">&#9660;</span>
       </div>
-      
-      <div class="main-content">
-        <div class="prog-card">
-          <div class="prog-meta"><span>Overall Progress</span><span>${Math.round(m/24*100)}%</span></div>
-          <div class="prog-track"><div class="prog-fill" style="width:${m/24*100}%"></div></div>
+      <div class="cost-body ${S.costOpen?'open':''}">
+        <div class="cost-grid">
+          ${[['The Code Book (Singh)','$13'],['Serious Cryptography (Aumasson)','$45'],['Understanding Cryptography (Paar)','$55'],['Real-World Cryptography (Wong)','$55'],['The Joy of Cryptography (Rosulek)','Free'],['Math Cryptography (Hoffstein)','$70'],['Moon Math Manual','Free'],['Coursera Crypto I — cert (opt.)','$49'],['Coursera Crypto II — cert (opt.)','$49']].map(([n,p])=>
+            `<div class="cost-row"><span>${n}</span><span>${p}</span></div>`).join('')}
         </div>
-        <div class="cost-card">
-          <div class="cost-head" onclick="toggleCost()">
-            <span class="cost-head-label">Cost Overview</span>
-            <span class="cost-icon ${S.costOpen?'open':''}">&#9660;</span>
-          </div>
-          <div class="cost-body ${S.costOpen?'open':''}">
-            <div class="cost-grid">
-              ${[['The Code Book (Singh)','$13'],['Serious Cryptography (Aumasson)','$45'],['Understanding Cryptography (Paar)','$55'],['Real-World Cryptography (Wong)','$55'],['The Joy of Cryptography (Rosulek)','Free'],['Math Cryptography (Hoffstein)','$70'],['Moon Math Manual','Free'],['Coursera Crypto I — cert (opt.)','$49'],['Coursera Crypto II — cert (opt.)','$49']].map(([n,p])=>
-                `<div class="cost-row"><span>${n}</span><span>${p}</span></div>`).join('')}
-            </div>
-            <p class="cost-total">Paid books: <strong>$283</strong> &nbsp;·&nbsp; With certs: <strong>$381</strong> &nbsp;·&nbsp; Three books are <span class="free-hi">completely free</span>.</p>
-          </div>
-        </div>
-        <div class="filter-wrap">
-          <div class="filter-label">Filter by Phase</div>
-          <div class="pill-row">
-            <button class="pill ${S.filter===0?'active':''}" data-id="0" onclick="setFilter(0)">All</button>
-            ${PHASES.map(p=>`<button class="pill ${S.filter===p.id?'active':''}" data-id="${p.id}" onclick="setFilter(${p.id})">${p.label}</button>`).join('')}
-          </div>
-        </div>
-        <div class="week-list">${W.map(renderCard).join('')}</div>
-        <div class="footer">
-          <span>Cryptography Mastery Plan · 24 Weeks · ${h}h</span>
-          <span>${m} of 24 weeks mastered</span>
-        </div>
+        <p class="cost-total">Paid books: <strong>$283</strong> &nbsp;·&nbsp; With certs: <strong>$381</strong> &nbsp;·&nbsp; Three books are <span class="free-hi">completely free</span>.</p>
       </div>
+    </div>
+    <div class="filter-wrap">
+      <div class="filter-label">Filter by Phase</div>
+      <div class="pill-row">
+        <button class="pill ${S.filter===0?'active':''}" data-id="0" onclick="setFilter(0)">All</button>
+        ${PHASES.map(p=>`<button class="pill ${S.filter===p.id?'active':''}" data-id="${p.id}" onclick="setFilter(${p.id})">${p.label}</button>`).join('')}
+      </div>
+    </div>
+    <div class="week-list">${W.map(renderCard).join('')}</div>
+    <div class="footer">
+      <span>Cryptography Mastery Plan · 24 Weeks · ${h}h</span>
+      <span>${m} of 24 weeks mastered</span>
     </div>`;
   if(isMobile)renderMobileNav();
 }
