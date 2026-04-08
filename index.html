@@ -6,54 +6,39 @@
 <title>Cryptography Mastery Plan</title>
 <style>
 /* ═══════════════════════════════
-   RESET
+   RESET & BASE (Apple / iOS Style)
 ═══════════════════════════════ */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;}
-body{
-  min-height:100vh;
-  font-family:system-ui,-apple-system,'Segoe UI',Helvetica,sans-serif;
-  font-size:15px;line-height:1.6;color:#fff;
-  overflow-x:hidden;background:#090b18;
+*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
+body {
+  min-height: 100vh;
+  /* iOS native font stack */
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px; 
+  line-height: 1.5;
+  color: #FFFFFF;
+  overflow-x: hidden;
+  background-color: #000000; /* Saf siyah arka plan */
 }
- 
+
 /* ═══════════════════════════════
-   BACKGROUND — HEX GRID + BLOBS
+   BACKGROUND — HIDDEN (Sadeleştirme)
 ═══════════════════════════════ */
-.bg{
-  position:fixed;inset:0;z-index:0;overflow:hidden;
-  background:
-    radial-gradient(ellipse at 18% 18%,#1a1060 0%,transparent 58%),
-    radial-gradient(ellipse at 82% 82%,#0c2240 0%,transparent 58%),
-    #090b18;
+/* Eski cyberpunk blob ve grid efektlerini HTML'i bozmadan gizliyoruz */
+.bg, .bg::after, .blob, .b1, .b2, .b3 {
+  display: none !important; 
 }
-/* subtle hex grid overlay */
-.bg::after{
-  content:'';position:absolute;inset:0;opacity:.055;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='52'%3E%3Cpath d='M30 2 L58 17 L58 35 L30 50 L2 35 L2 17 Z' fill='none' stroke='%236366f1' stroke-width='.6'/%3E%3C/svg%3E");
-  background-size:60px 52px;
-  pointer-events:none;
-}
-.blob{
-  position:absolute;border-radius:50%;
-  filter:blur(110px);opacity:.42;
-  animation:drift linear infinite;
-}
-.b1{width:720px;height:720px;background:#2e1065;top:-220px;left:-160px;animation-duration:32s;}
-.b2{width:580px;height:580px;background:#0c2340;bottom:-120px;right:-120px;animation-duration:40s;animation-delay:-15s;}
-.b3{width:420px;height:420px;background:#1e3a5f;top:38%;left:38%;animation-duration:26s;animation-delay:-8s;opacity:.28;}
-@keyframes drift{
-  0%  {transform:translate(0,0) scale(1);}
-  33% {transform:translate(32px,-52px) scale(1.04);}
-  66% {transform:translate(-22px,38px) scale(.97);}
-  100%{transform:translate(0,0) scale(1);}
-}
- 
+
 /* ═══════════════════════════════
    LAYOUT
 ═══════════════════════════════ */
-.page{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:52px 20px 80px;}
- 
+.page {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 60px 20px 100px; /* Üstten ve alttan biraz daha nefes aldırıldı */
+}
 /* ═══════════════════════════════
    GLASS LEVELS
 ═══════════════════════════════ */
