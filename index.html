@@ -5,416 +5,543 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
 <title>Cryptography Mastery Plan</title>
 <style>
-/* ═══════════════════════════════
-   RESET & BASE (Apple / iOS Style)
-═══════════════════════════════ */
-*,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
-body {
-  min-height: 100vh;
-  /* iOS native font stack */
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 16px; 
-  line-height: 1.5;
-  color: #FFFFFF;
-  overflow-x: hidden;
-  background-color: #000000; /* Saf siyah arka plan */
+/* ══════════════════════════════════════
+   CSS VARIABLES — DARK / LIGHT
+══════════════════════════════════════ */
+:root {
+  --bg:        #0c0f1a;
+  --surface:   #131726;
+  --surface-2: #1b2035;
+  --surface-3: #232944;
+  --border:    rgba(255,255,255,.07);
+  --border-hi: rgba(255,255,255,.13);
+  --text:      #e8ecf5;
+  --text-2:    #8892a6;
+  --text-3:    #505a72;
+  --shadow-sm: 0 1px 8px rgba(0,0,0,.35);
+  --shadow-md: 0 4px 24px rgba(0,0,0,.45);
+  --shadow-lg: 0 14px 56px rgba(0,0,0,.6);
+  --prog-bg:   linear-gradient(90deg,#6366f1,#8b5cf6);
+  --r-card:    16px;
+  --r-inner:   10px;
+  color-scheme: dark;
 }
-
-/* ═══════════════════════════════
-   BACKGROUND — HIDDEN (Sadeleştirme)
-═══════════════════════════════ */
-/* Eski cyberpunk blob ve grid efektlerini HTML'i bozmadan gizliyoruz */
-.bg, .bg::after, .blob, .b1, .b2, .b3 {
-  display: none !important; 
+body.light {
+  --bg:        #edf0f8;
+  --surface:   #ffffff;
+  --surface-2: #f4f5fc;
+  --surface-3: #e8ebf5;
+  --border:    rgba(0,0,0,.07);
+  --border-hi: rgba(0,0,0,.14);
+  --text:      #181a2a;
+  --text-2:    #4b5568;
+  --text-3:    #9ca3b4;
+  --shadow-sm: 0 1px 8px rgba(0,0,0,.07);
+  --shadow-md: 0 4px 24px rgba(0,0,0,.1);
+  --shadow-lg: 0 14px 56px rgba(0,0,0,.14);
+  color-scheme: light;
 }
-
-/* ═══════════════════════════════
+ 
+/* ══════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;-webkit-tap-highlight-color:transparent;}
+body{
+  min-height:100vh;
+  font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+  font-size:15px;line-height:1.6;
+  color:var(--text);background:var(--bg);
+  overflow-x:hidden;transition:background .25s,color .25s;
+}
+ 
+/* ══════════════════════════════════════
+   THEME TOGGLE BUTTON
+══════════════════════════════════════ */
+#theme-btn{
+  position:fixed;top:18px;right:18px;z-index:999;
+  width:40px;height:40px;border-radius:50%;
+  background:var(--surface);border:1px solid var(--border-hi);
+  color:var(--text-2);font-size:16px;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-sm);
+  transition:background .2s,color .2s,border-color .2s,transform .15s;
+}
+#theme-btn:hover{color:var(--text);background:var(--surface-2);}
+#theme-btn:active{transform:scale(.9);}
+ 
+/* ══════════════════════════════════════
    LAYOUT
-═══════════════════════════════ */
-.page {
-  position: relative;
-  z-index: 1;
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 60px 20px 100px; /* Üstten ve alttan biraz daha nefes aldırıldı */
-}
-/* ═══════════════════════════════
-   SURFACES & CARDS 
-═══════════════════════════════ */
-.glass, .glass-strong, .glass-deep {
-  background-color: #1C1C1E; 
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border: none;
-  box-shadow: none;
-  border-radius: 14px;
-}
+══════════════════════════════════════ */
+.page{max-width:860px;margin:0 auto;padding:56px 20px 80px;}
  
-/* ═══════════════════════════════
+/* ══════════════════════════════════════
    HEADER
-═══════════════════════════════ */
-.header { margin-bottom: 32px; }
-.eyebrow { 
-  font-size: 15px; 
-  letter-spacing: 0; 
-  text-transform: none; 
-  color: #8E8E93; /* iOS Gri */
-  margin-bottom: 4px; 
-  font-weight: 500;
+══════════════════════════════════════ */
+.header{margin-bottom:36px;padding-right:52px;}
+.eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;font-weight:500;}
+.main-title{
+  font-size:clamp(30px,6vw,46px);font-weight:800;line-height:1.12;
+  letter-spacing:-1px;color:var(--text);margin-bottom:8px;
 }
-.main-title {
-  font-size: clamp(32px, 7vw, 40px); 
-  font-weight: 700; 
-  letter-spacing: -0.5px;
-  background: none;
-  -webkit-text-fill-color: #FFFFFF;
-  color: #FFFFFF;
-  margin-bottom: 8px;
-}
-.sub-title { font-size: 17px; color: #8E8E93; font-weight: 400; line-height: 1.4; }
-
-/* ═══════════════════════════════
+.sub-title{font-size:clamp(13px,2vw,15px);color:var(--text-2);font-weight:400;}
+ 
+/* ══════════════════════════════════════
    STATS
-═══════════════════════════════ */
-.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
-.stat-card { padding: 16px 12px; text-align: center; }
-.sv { font-size: 22px; font-weight: 600; color: #FFFFFF; }
-.sl { font-size: 13px; letter-spacing: 0; text-transform: none; color: #8E8E93; margin-top: 4px; }
-
-/* ═══════════════════════════════
+══════════════════════════════════════ */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-card);padding:16px 14px;text-align:center;
+  box-shadow:var(--shadow-sm);
+}
+.sv{font-size:clamp(18px,3.5vw,24px);font-weight:700;color:var(--text);line-height:1;}
+.sl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-3);margin-top:5px;}
+ 
+/* ══════════════════════════════════════
    PROGRESS
-═══════════════════════════════ */
-.prog-card { padding: 16px 20px; margin-bottom: 16px; }
-.prog-meta { display: flex; justify-content: space-between; font-size: 15px; font-weight: 500; text-transform: none; letter-spacing: 0; color: #FFFFFF; margin-bottom: 12px; }
-.prog-track { height: 6px; background: #3A3A3C; border-radius: 3px; overflow: hidden; }
-.prog-fill { height: 100%; border-radius: 3px; background: #0A84FF; /* Apple Mavisi */ transition: width .5s ease; }
-
-/* ═══════════════════════════════
-   COST
-═══════════════════════════════ */
-.cost-card { margin-bottom: 24px; overflow: hidden; }
-.cost-head { padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-.cost-head:hover { background: rgba(255,255,255, 0.05); }
-.cost-head-label { font-size: 17px; font-weight: 600; text-transform: none; letter-spacing: 0; color: #FFFFFF; }
-.cost-icon { font-size: 14px; color: #8E8E93; transition: transform .2s; }
-.cost-icon.open { transform: rotate(180deg); }
-.cost-body { padding: 0 20px 16px; display: none; }
-.cost-body.open { display: block; }
-.cost-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 12px 24px; margin-bottom: 16px; margin-top: 10px; }
-.cost-row { display: flex; justify-content: space-between; font-size: 15px; color: #EBEBF5; padding: 8px 0; border-bottom: 1px solid #38383A; }
-.cost-row:last-child { border-bottom: none; }
-.cost-row span:last-child { color: #8E8E93; font-family: inherit; } 
-.cost-total { font-size: 14px; color: #8E8E93; padding-top: 12px; border-top: 1px solid #38383A; }
-.cost-total strong { color: #FFFFFF; font-weight: 600; }
-.free-hi { color: #34C759; } /* iOS Yeşili */
+══════════════════════════════════════ */
+.prog-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-card);padding:16px 20px;margin-bottom:12px;
+  box-shadow:var(--shadow-sm);
+}
+.prog-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-2);margin-bottom:10px;}
+.prog-track{height:4px;background:var(--border-hi);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:2px;background:var(--prog-bg);transition:width .5s cubic-bezier(.4,0,.2,1);}
  
-/* ═══════════════════════════════
-   FILTER PILLS (iOS Segmented Style)
-═══════════════════════════════ */
-.filter-wrap { margin-bottom: 24px; }
-.filter-label { display: none; } /* iOS tarzında filtre üstü etiket pek kullanılmaz, alanı temizliyoruz */
-.pill-row { display: flex; flex-wrap: wrap; gap: 8px; }
-.pill {
-  padding: 8px 16px; border-radius: 20px; font-size: 15px; font-weight: 500;
-  cursor: pointer; border: none; letter-spacing: 0; text-transform: none;
-  color: #EBEBF5; background: #2C2C2E; /* iOS koyu gri buton */
-  transition: all .2s ease;
+/* ══════════════════════════════════════
+   COST BOX
+══════════════════════════════════════ */
+.cost-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-card);margin-bottom:20px;overflow:hidden;
+  box-shadow:var(--shadow-sm);
 }
-.pill:active { transform: scale(0.95); opacity: 0.8; }
-.pill.active { background: #FFFFFF; color: #000000; font-weight: 600; } /* Apple tarzı yüksek kontrast aktif durum */
-
-/* ═══════════════════════════════
-   WEEK CARDS (iOS List View)
-═══════════════════════════════ */
-.week-list { display: flex; flex-direction: column; gap: 12px; }
-.week-card {
-  border-radius: 14px; overflow: hidden;
-  background: #1C1C1E; /* Temiz iOS mat kartı */
-  transition: transform .2s ease;
+.cost-head{
+  padding:14px 20px;display:flex;justify-content:space-between;align-items:center;
+  cursor:pointer;user-select:none;transition:background .15s;
 }
-.week-card.hidden { display: none; }
-.week-card:active { transform: scale(0.98); } /* Tıklama geri bildirimi */
-
-.week-head {
-  display: flex; align-items: center; gap: 16px; padding: 16px 20px;
-  cursor: pointer; user-select: none;
-  /* Orijinaldeki neon renkli sol kalın çizgiyi kaldırdık */
-}
-.wnum {
-  font-size: 17px; font-weight: 600; color: #8E8E93; /* Sayılardaki neon parlama silindi */
-  min-width: 28px; flex-shrink: 0; text-shadow: none;
-}
-.wmeta { flex: 1; min-width: 0; }
-.wtitle {
-  font-size: 17px; font-weight: 600; color: #FFFFFF;
-  line-height: 1.3; margin-bottom: 4px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.week-card.mastered .wtitle { color: #8E8E93; text-decoration: line-through; }
-.wtags { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-.tag { font-size: 13px; color: #8E8E93; text-transform: none; letter-spacing: 0; }
-.tag.phase { color: #0A84FF; font-weight: 500; } /* Vurgu rengini Apple Mavisi yaptık */
-.tag.lv { padding: 4px 8px; border-radius: 6px; font-size: 12px; font-weight: 500; background: #2C2C2E; color: #EBEBF5; border: none; }
-
-.wchev { font-size: 14px; color: #8E8E93; flex-shrink: 0; transition: transform .2s ease; }
-.week-card.open .wchev { transform: rotate(90deg); }
-
-/* expanded view */
-.wbody { display: none; padding-top: 8px; }
-.week-card.open .wbody { display: block; }
-.wgoal {
-  margin: 0 20px 16px; padding: 12px 16px;
-  border-radius: 10px; background: #2C2C2E; /* Düz mat iç kutu */
-  font-size: 15px; color: #EBEBF5; line-height: 1.5; border: none;
-}
-.glabel { font-size: 13px; font-weight: 600; color: #8E8E93; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-
-/* tabs inside card */
-.tbar { display: flex; margin: 0 20px; border-bottom: 1px solid #38383A; }
-.tbtn {
-  flex: 1; padding: 12px 0; font-size: 14px; font-weight: 500;
-  color: #8E8E93; background: none; border: none;
-  border-bottom: 2px solid transparent; margin-bottom: -1px;
-  cursor: pointer; text-transform: none; letter-spacing: 0;
-  transition: all .2s ease;
-}
-.tbtn:hover { color: #D1D1D6; }
-.tbtn.active { color: #0A84FF; border-bottom-color: #0A84FF; } /* Apple Mavisi alt çizgi */
-.tcontent { display: none; padding: 16px 20px 24px; }
-.tcontent.active { display: block; }
+.cost-head:hover{background:var(--surface-2);}
+.cost-head-label{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-2);}
+.cost-icon{font-size:11px;color:var(--text-3);transition:transform .22s;}
+.cost-icon.open{transform:rotate(180deg);}
+.cost-body{padding:0 20px 18px;display:none;}
+.cost-body.open{display:block;}
+.cost-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:0 24px;margin-top:6px;margin-bottom:12px;}
+.cost-row{display:flex;justify-content:space-between;font-size:13px;color:var(--text-2);padding:6px 0;border-bottom:1px solid var(--border);gap:8px;}
+.cost-row:last-child{border-bottom:none;}
+.cost-row span:last-child{font-family:'Courier New',monospace;color:var(--text);white-space:nowrap;}
+.cost-total{font-size:12px;color:var(--text-3);padding-top:10px;border-top:1px solid var(--border);}
+.cost-total strong{color:var(--text);}
+.free-hi{color:#6ee7b7;}
  
-/* ═══════════════════════════════
-   RESOURCES & PRACTICE
-═══════════════════════════════ */
-.rlist { display: flex; flex-direction: column; gap: 10px; }
-.ritem {
-  border-radius: 12px; overflow: hidden;
-  background: #2C2C2E; border: none; box-shadow: none;
+/* ══════════════════════════════════════
+   FILTER PILLS
+══════════════════════════════════════ */
+.filter-wrap{margin-bottom:22px;}
+.filter-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;}
+.pill-row{display:flex;flex-wrap:wrap;gap:7px;}
+.pill{
+  padding:6px 16px;border-radius:999px;font-size:11px;font-weight:600;
+  letter-spacing:.5px;text-transform:uppercase;cursor:pointer;
+  border:1px solid var(--border-hi);color:var(--text-2);
+  background:var(--surface);transition:all .15s;
+  box-shadow:var(--shadow-sm);
 }
-.rrow { display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; }
-.rtype {
-  font-size: 11px; font-weight: 600; padding: 4px 8px; border-radius: 6px;
-  background: #3A3A3C; color: #EBEBF5; white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+.pill:hover{background:var(--surface-2);color:var(--text);}
+.pill:active{transform:scale(.93);transition:transform .07s;}
+.pill.active{background:var(--text);color:var(--bg);border-color:var(--text);}
+ 
+/* ══════════════════════════════════════
+   WEEK CARDS
+══════════════════════════════════════ */
+.week-list{display:flex;flex-direction:column;gap:8px;}
+.week-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r-card);overflow:hidden;
+  box-shadow:var(--shadow-sm);
+  transition:box-shadow .2s,transform .15s,border-color .2s;
 }
-.rinfo { flex: 1; min-width: 0; }
-.rname { font-size: 15px; font-weight: 600; color: #FFFFFF; line-height: 1.3; }
-.rauthor { font-size: 13px; color: #8E8E93; margin-top: 2px; }
-.rdesc { font-size: 14px; color: #D1D1D6; margin-top: 4px; line-height: 1.4; }
-
-.pdf-strip {
-  padding: 12px 16px; background: #1C1C1E; border-top: 1px solid #38383A;
-  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+.week-card.hidden{display:none;}
+.week-card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);}
+.week-card.open{box-shadow:var(--shadow-md);border-color:var(--border-hi);}
+ 
+.week-head{
+  display:flex;align-items:center;gap:14px;padding:16px 20px;
+  cursor:pointer;user-select:none;
+  border-left:3px solid var(--pc,#6366f1);
+  transition:background .15s;
 }
-.pdf-label { font-size: 13px; color: #8E8E93; }
-.pdf-fname { font-size: 13px; color: #EBEBF5; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-
-.psec { margin-top: 20px; }
-.slabel { font-size: 13px; font-weight: 600; color: #8E8E93; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-.pitem {
-  display: flex; gap: 12px; padding: 12px 16px; border-radius: 10px;
-  background: #2C2C2E; border: none; margin-bottom: 8px;
+.week-head:hover{background:var(--surface-2);}
+.wnum{
+  font-size:22px;font-weight:800;line-height:1;color:var(--pc,#6366f1);
+  min-width:34px;flex-shrink:0;font-variant-numeric:tabular-nums;
 }
-.psrc { font-size: 13px; font-weight: 600; color: #0A84FF; white-space: nowrap; flex-shrink: 0; }
-.ptask { font-size: 15px; color: #EBEBF5; flex: 1; line-height: 1.4; }
-.plink { font-size: 13px; color: #0A84FF; text-decoration: none; flex-shrink: 0; font-weight: 500; }
-
-/* ═══════════════════════════════
-   BUTTONS
-═══════════════════════════════ */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  min-height: 36px; padding: 8px 16px; border-radius: 8px;
-  font-size: 14px; font-weight: 600; cursor: pointer; border: none; font-family: inherit; white-space: nowrap;
-  transition: opacity .2s ease; text-transform: none; letter-spacing: 0;
+.wmeta{flex:1;min-width:0;}
+.wtitle{
+  font-size:14px;font-weight:600;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  line-height:1.35;margin-bottom:4px;
 }
-.btn:active { opacity: 0.7; transform: scale(0.96); }
-.btn-p { background: #3A3A3C; color: #FFFFFF; } /* Secondary */
-.btn-a { background: #0A84FF; color: #FFFFFF; } /* Primary Apple Blue */
-.btn-g { background: transparent; color: #0A84FF; } /* Ghost / Text button */
-.btn-d { background: #FF453A; color: #FFFFFF; } /* Destructive Red */
-
-.btn-group { display: inline-flex; align-items: center; gap: 8px; background: none; border: none; box-shadow: none; padding: 0; }
-.btn-group .btn { min-height: 32px; padding: 6px 12px; font-size: 13px; }
-
-/* ═══════════════════════════════
-   LINKS
-═══════════════════════════════ */
-.llist { display: flex; flex-direction: column; gap: 8px; }
-.litem {
-  display: flex; align-items: center; justify-content: space-between; padding: 14px 16px;
-  border-radius: 10px; background: #2C2C2E; border: none; text-decoration: none; transition: background .2s ease;
+.week-card.mastered .wtitle{color:var(--text-3);text-decoration:line-through;}
+.wtags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.tag{font-size:11px;color:var(--text-3);letter-spacing:.3px;}
+.tag.phase{color:var(--pc,#6366f1);font-weight:700;}
+.tag.lv{
+  padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;
+  border:1px solid;
 }
-.litem:active { background: #3A3A3C; }
-.lname { font-size: 15px; font-weight: 500; color: #FFFFFF; display: flex; align-items: center; gap: 10px; }
-.larrow { color: #0A84FF; font-size: 15px; }
-.ldomain { font-size: 13px; color: #8E8E93; }
-
-/* ═══════════════════════════════
+.wchev{font-size:10px;color:var(--text-3);flex-shrink:0;transition:transform .22s cubic-bezier(.4,0,.2,1);}
+.week-card.open .wchev{transform:rotate(90deg);}
+ 
+/* expanded body */
+.wbody{display:none;border-top:1px solid var(--border);}
+.week-card.open .wbody{display:block;}
+.wgoal{
+  margin:16px 20px 0;padding:12px 16px 12px 18px;
+  border-left:3px solid var(--pc,#6366f1);border-radius:0 var(--r-inner) var(--r-inner) 0;
+  background:var(--surface-2);font-size:13px;color:var(--text-2);line-height:1.7;
+}
+.glabel{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pc,#6366f1);margin-bottom:4px;}
+ 
+/* ══════════════════════════════════════
+   TABS
+══════════════════════════════════════ */
+.tbar{display:flex;margin:14px 20px 0;border-bottom:1px solid var(--border);}
+.tbtn{
+  padding:8px 14px;font-size:11px;font-weight:600;letter-spacing:.8px;
+  text-transform:uppercase;color:var(--text-3);background:none;border:none;
+  border-bottom:2px solid transparent;margin-bottom:-1px;
+  cursor:pointer;font-family:inherit;transition:color .15s,border-color .15s;
+}
+.tbtn:hover{color:var(--text-2);}
+.tbtn:active{transform:scale(.95);transition:transform .07s;}
+.tbtn.active{color:var(--text);border-bottom-color:var(--pc,#6366f1);}
+.tcontent{display:none;padding:16px 20px 22px;}
+.tcontent.active{display:block;}
+ 
+/* ══════════════════════════════════════
+   RESOURCES
+══════════════════════════════════════ */
+.rlist{display:flex;flex-direction:column;gap:8px;}
+.ritem{
+  border-radius:var(--r-inner);overflow:hidden;
+  background:var(--surface-2);border:1px solid var(--border);
+}
+.rrow{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;}
+.rtype{
+  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:3px 8px;border-radius:999px;
+  background:var(--surface-3);color:var(--text-2);
+  border:1px solid var(--border);white-space:nowrap;flex-shrink:0;margin-top:2px;
+}
+.rinfo{flex:1;min-width:0;}
+.rname{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;}
+.rauthor{font-size:11px;color:var(--text-3);font-style:italic;margin-top:2px;}
+.rdesc{font-size:12px;color:var(--text-2);margin-top:3px;line-height:1.5;}
+ 
+.pdf-strip{
+  padding:10px 15px;background:var(--surface-3);border-top:1px solid var(--border);
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+}
+.pdf-label{font-size:12px;color:var(--text-3);}
+.pdf-fname{font-size:12px;color:var(--text-2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+ 
+.psec{margin-top:16px;}
+.slabel{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:8px;}
+.pitem{
+  display:flex;align-items:flex-start;gap:10px;padding:10px 14px;
+  border-radius:var(--r-inner);background:var(--surface-2);border:1px solid var(--border);margin-bottom:6px;
+}
+.psrc{font-size:10px;font-weight:700;color:var(--pc,#6366f1);white-space:nowrap;padding-top:2px;flex-shrink:0;}
+.ptask{font-size:12px;color:var(--text-2);flex:1;line-height:1.5;}
+/* visit link — framed pill */
+.plink{
+  font-size:11px;font-weight:600;color:var(--pc,#6366f1);text-decoration:none;
+  flex-shrink:0;align-self:center;
+  padding:4px 12px;border-radius:999px;
+  border:1px solid var(--border-hi);background:var(--surface-3);
+  transition:background .15s,border-color .15s;
+}
+.plink:hover{background:var(--surface-2);border-color:var(--pc,#6366f1);}
+ 
+/* ══════════════════════════════════════
+   BUTTONS & GROUPS
+══════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+  min-height:38px;padding:8px 20px;border-radius:999px;
+  font-size:12px;font-weight:600;letter-spacing:.4px;
+  cursor:pointer;border:1px solid transparent;font-family:inherit;white-space:nowrap;
+  transition:background .15s,filter .15s,border-color .15s;
+}
+.btn:active{transform:scale(.92);transition:transform .07s cubic-bezier(.4,0,.2,1);}
+.btn-p{background:var(--surface-2);border-color:var(--border-hi);color:var(--text);}
+.btn-p:hover{background:var(--surface-3);}
+.btn-a{background:var(--pc,#6366f1);border-color:var(--pc,#6366f1);color:#fff;}
+.btn-a:hover{filter:brightness(1.12);}
+.btn-g{background:transparent;border-color:var(--border-hi);color:var(--text-2);}
+.btn-g:hover{background:var(--surface-2);color:var(--text);}
+.btn-d{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.25);color:#fca5a5;}
+.btn-d:hover{background:rgba(239,68,68,.18);}
+ 
+.btn-group{
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--surface-3);border:1px solid var(--border-hi);
+  border-radius:999px;padding:4px;
+}
+.btn-group .btn{min-height:32px;padding:5px 14px;font-size:11px;}
+ 
+/* ══════════════════════════════════════
+   LINKS TAB
+══════════════════════════════════════ */
+.llist{display:flex;flex-direction:column;gap:6px;}
+.litem{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;border-radius:var(--r-inner);
+  background:var(--surface-2);border:1px solid var(--border);
+  text-decoration:none;transition:background .15s,transform .12s;
+}
+.litem:hover{background:var(--surface-3);transform:translateX(3px);}
+.litem:active{transform:scale(.98);}
+.lname{font-size:13px;color:var(--text);display:flex;align-items:center;gap:9px;}
+.larrow{color:var(--pc,#6366f1);font-size:13px;}
+.ldomain{font-family:'Courier New',monospace;font-size:10px;color:var(--text-3);}
+ 
+/* ══════════════════════════════════════
    NOTES
-═══════════════════════════════ */
-.nhead { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-.ncount { font-size: 12px; color: #8E8E93; }
-.narea {
-  width: 100%; min-height: 120px; resize: vertical;
-  background: #2C2C2E; border: 1px solid #38383A; border-radius: 10px;
-  padding: 12px 16px; font-size: 15px; font-family: inherit; color: #FFFFFF;
-  line-height: 1.5; outline: none; transition: border-color .2s;
+══════════════════════════════════════ */
+.nhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.ncount{font-family:'Courier New',monospace;font-size:10px;color:var(--text-3);}
+.narea{
+  width:100%;min-height:140px;resize:vertical;
+  background:var(--surface-2);border:1px solid var(--border-hi);
+  border-radius:var(--r-inner);padding:12px 15px;
+  font-size:13px;font-family:inherit;color:var(--text);line-height:1.7;
+  outline:none;transition:border-color .2s,box-shadow .2s;
 }
-.narea::placeholder { color: #8E8E93; }
-.narea:focus { border-color: #0A84FF; }
-.nact { display: flex; justify-content: flex-end; margin-top: 12px; }
-
-/* ═══════════════════════════════
-   LEVEL CHECK (Checkboxes)
-═══════════════════════════════ */
-.lvbadge {
-  display: flex; align-items: center; justify-content: space-between; padding: 16px;
-  border-radius: 12px; background: #2C2C2E; border: none; margin-bottom: 16px;
+.narea::placeholder{color:var(--text-3);font-style:italic;}
+.narea:focus{border-color:var(--pc,#6366f1);box-shadow:0 0 0 3px rgba(99,102,241,.1);}
+.nact{display:flex;justify-content:flex-end;margin-top:8px;}
+ 
+/* ══════════════════════════════════════
+   LEVEL CHECK
+══════════════════════════════════════ */
+.lvbadge{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 18px;border-radius:var(--r-inner);
+  background:var(--surface-2);border:1px solid var(--border);margin-bottom:12px;
 }
-.lvlabel { font-size: 13px; font-weight: 600; color: #8E8E93; margin-bottom: 4px; text-transform: uppercase; }
-.lvname { font-size: 17px; font-weight: 600; }
-.lvfrac { font-size: 24px; font-weight: 700; color: #FFFFFF; }
-.lvfrac small { font-size: 15px; color: #8E8E93; }
-.lvtrack { height: 6px; background: #3A3A3C; border-radius: 3px; overflow: hidden; margin-bottom: 20px; }
-.lvbar { height: 100%; border-radius: 3px; transition: width .4s ease; }
-
-.cklist { display: flex; flex-direction: column; gap: 8px; }
-.ckitem {
-  display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 10px;
-  background: #2C2C2E; border: none; cursor: pointer; text-align: left; width: 100%;
-  font-family: inherit; color: inherit; transition: background .2s;
+.lvlabel{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;}
+.lvname{font-size:17px;font-weight:700;}
+.lvfrac{font-size:26px;font-weight:800;color:var(--text-2);line-height:1;}
+.lvfrac small{font-size:14px;color:var(--text-3);}
+.lvtrack{height:4px;background:var(--border-hi);border-radius:2px;overflow:hidden;margin-bottom:16px;}
+.lvbar{height:100%;border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1);}
+.cklist{display:flex;flex-direction:column;gap:6px;}
+.ckitem{
+  display:flex;align-items:flex-start;gap:12px;padding:12px 14px;
+  border-radius:var(--r-inner);background:var(--surface-2);border:1px solid var(--border);
+  border-left:2px solid transparent;cursor:pointer;text-align:left;width:100%;
+  font-family:inherit;color:inherit;
+  transition:background .15s,border-color .15s;
 }
-.ckitem:active { background: #3A3A3C; transform: scale(0.98); }
-.ckbox {
-  width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid #8E8E93;
-  background: transparent; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
-  transition: all .2s ease;
+.ckitem:hover{background:var(--surface-3);}
+.ckitem:active{transform:scale(.98);}
+.ckitem.on{background:var(--surface-3);border-left-color:var(--pc,#6366f1);border-color:var(--border-hi);}
+.ckbox{
+  width:20px;height:20px;border-radius:50%;border:2px solid var(--border-hi);
+  background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  margin-top:1px;transition:all .18s cubic-bezier(.4,0,.2,1);
 }
-.ckitem.on .ckbox { background: #0A84FF; border-color: #0A84FF; box-shadow: none; }
-.cktick { display: none; color: #FFF; font-size: 12px; font-weight: bold; }
-.ckitem.on .cktick { display: block; }
-.cktxt { font-size: 15px; color: #EBEBF5; line-height: 1.4; transition: color .2s; }
-.ckitem.on .cktxt { color: #FFFFFF; }
-
-.mastered-note {
-  margin-top: 16px; padding: 12px; border-radius: 10px;
-  background: rgba(52, 199, 89, 0.1); border: none;
-  color: #34C759; font-size: 14px; text-align: center; font-weight: 500;
+.ckitem.on .ckbox{background:var(--pc,#6366f1);border-color:var(--pc,#6366f1);}
+.cktick{display:none;color:#fff;font-size:11px;font-weight:800;line-height:1;}
+.ckitem.on .cktick{display:block;}
+.cktxt{font-size:12px;color:var(--text-2);line-height:1.6;transition:color .15s;}
+.ckitem.on .cktxt{color:var(--text);}
+.mastered-note{
+  margin-top:12px;padding:10px 14px;border-radius:var(--r-inner);
+  background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.2);
+  color:#6ee7b7;font-size:12px;text-align:center;font-style:italic;
 }
-
-/* ═══════════════════════════════
+ 
+/* ── CHECKBOX BOUNCE ── */
+@keyframes ck-pop{
+  0%  {transform:scale(1);}
+  30% {transform:scale(1.45);}
+  58% {transform:scale(.78);}
+  78% {transform:scale(1.1);}
+  100%{transform:scale(1);}
+}
+.ckbox.pop{animation:ck-pop .35s cubic-bezier(.4,0,.2,1) forwards;}
+ 
+/* ══════════════════════════════════════
    FOOTER
-═══════════════════════════════ */
-.footer {
-  margin-top: 40px; padding-top: 20px; border-top: 1px solid #38383A;
-  display: flex; justify-content: space-between; font-size: 13px;
-  color: #8E8E93; flex-wrap: wrap; gap: 8px; letter-spacing: 0;
+══════════════════════════════════════ */
+.footer{
+  margin-top:40px;padding-top:20px;border-top:1px solid var(--border);
+  display:flex;justify-content:space-between;font-size:11px;
+  color:var(--text-3);flex-wrap:wrap;gap:8px;letter-spacing:.5px;
 }
-
-/* ═══════════════════════════════
-   MOBILE BOTTOM NAV (iOS Tab Bar)
-═══════════════════════════════ */
-#mobile-nav {
-  display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(28, 28, 30, 0.85); /* iOS Translucent dark */
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border-top: 0.5px solid rgba(255, 255, 255, 0.15);
-  padding-bottom: env(safe-area-inset-bottom, 0); box-shadow: none;
+ 
+/* ══════════════════════════════════════
+   MOBILE — BOTTOM NAV
+══════════════════════════════════════ */
+#mobile-nav{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(var(--nav-bg,13,15,26),.9);
+  backdrop-filter:blur(24px) saturate(180%);
+  -webkit-backdrop-filter:blur(24px) saturate(180%);
+  border-top:1px solid var(--border-hi);
+  padding-bottom:env(safe-area-inset-bottom,0);
+  box-shadow:0 -4px 24px rgba(0,0,0,.35);
 }
-.mnav-track {
-  display: flex; overflow-x: auto; padding: 10px 16px; gap: 8px;
-  scrollbar-width: none; -ms-overflow-style: none;
+body.light #mobile-nav{--nav-bg:237,240,248;}
+.mnav-track{
+  display:flex;overflow-x:auto;padding:11px 16px;gap:9px;
+  scrollbar-width:none;-ms-overflow-style:none;
 }
-.mnav-pill {
-  flex-shrink: 0; min-height: 36px; padding: 8px 16px;
-  border-radius: 18px; font-size: 14px; font-weight: 500; cursor: pointer;
-  border: none; color: #8E8E93; background: transparent; text-transform: none; letter-spacing: 0;
-  -webkit-tap-highlight-color: transparent; transition: all .2s;
+.mnav-track::-webkit-scrollbar{display:none;}
+.mnav-pill{
+  flex-shrink:0;min-height:44px;padding:9px 20px;
+  border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.5px;
+  text-transform:uppercase;cursor:pointer;
+  border:1px solid var(--border-hi);color:var(--text-2);
+  background:var(--surface);
+  display:flex;align-items:center;white-space:nowrap;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .15s,color .15s,border-color .15s;
 }
-.mnav-pill.active { background: #3A3A3C; color: #FFFFFF; }
-
-/* ═══════════════════════════════
-   TOAST (mobile mastered)
-═══════════════════════════════ */
-#toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); z-index: 500; pointer-events: none; opacity: 0; transition: all .3s ease; }
-#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-.toast-inner {
-  padding: 12px 20px; border-radius: 24px; font-size: 15px; font-weight: 500;
-  background: #34C759; color: #FFF; border: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3); backdrop-filter: none;
+.mnav-pill:active{transform:scale(.93);transition:transform .07s cubic-bezier(.4,0,.2,1);}
+.mnav-pill.active{background:var(--text);color:var(--bg);border-color:var(--text);}
+ 
+/* ══════════════════════════════════════
+   TOAST
+══════════════════════════════════════ */
+#toast{
+  position:fixed;bottom:90px;left:50%;
+  transform:translateX(-50%) translateY(14px);
+  z-index:500;pointer-events:none;opacity:0;
+  transition:opacity .26s,transform .26s cubic-bezier(.22,1,.36,1);
 }
-
-/* ═══════════════════════════════
-   BOTTOM SHEET (iOS Native Feel)
-═══════════════════════════════ */
-.sh-overlay { position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,.6); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
-.sheet {
-  position: fixed; bottom: 0; left: 0; right: 0; z-index: 300;
-  height: 88vh; display: flex; flex-direction: column;
-  border-radius: 12px 12px 0 0; overflow: hidden; will-change: transform;
-  background: #1C1C1E; border: none; box-shadow: 0 -4px 20px rgba(0,0,0,.4);
-  padding-bottom: env(safe-area-inset-bottom, 0);
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+.toast-inner{
+  padding:10px 22px;border-radius:999px;font-size:13px;font-weight:600;
+  background:rgba(110,231,183,.18);border:1px solid rgba(110,231,183,.35);
+  color:#a7f3d0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:0 4px 20px rgba(0,0,0,.3);
 }
-.sheet::before { display: none; } /* Inner glow removed */
-
-.sh-handle-area { flex-shrink: 0; padding: 10px 20px 4px; display: flex; justify-content: center; touch-action: none; cursor: grab; }
-.sh-handle-bar { width: 36px; height: 5px; border-radius: 2.5px; background: #48484A; }
-
-.sh-sticky { flex-shrink: 0; padding: 8px 20px 16px; border-bottom: 1px solid #38383A; display: flex; align-items: center; gap: 16px; }
-.sh-wnum { font-size: 20px; font-weight: 600; color: #8E8E93; min-width: 28px; }
-.sh-wmeta { flex: 1; min-width: 0; }
-.sh-wtitle { font-size: 17px; font-weight: 600; color: #FFFFFF; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.sh-wsub { font-size: 13px; color: #8E8E93; margin-top: 4px; }
-
-.sh-tbar { flex-shrink: 0; display: flex; padding: 0 16px; border-bottom: 1px solid #38383A; }
-.sh-tbar .tbtn { flex: 1; padding: 12px 4px; font-size: 14px; }
-
-.sh-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 16px 20px 28px; }
-
-.tab-dots { display: flex; justify-content: center; gap: 8px; padding: 20px 0 8px; }
-.tab-dot { height: 6px; width: 6px; border-radius: 3px; background: #48484A; transition: all .2s; }
-.tab-dot.active { width: 6px; background: #FFFFFF; } /* No wide pill dots, pure iOS */
-
-/* ═══════════════════════════════
+ 
+/* ══════════════════════════════════════
+   SHEET OVERLAY
+══════════════════════════════════════ */
+.sh-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+ 
+/* ══════════════════════════════════════
+   BOTTOM SHEET
+══════════════════════════════════════ */
+.sheet{
+  position:fixed;bottom:0;left:0;right:0;z-index:300;
+  height:88vh;display:flex;flex-direction:column;
+  border-radius:20px 20px 0 0;overflow:hidden;will-change:transform;
+  background:var(--surface);border:1px solid var(--border-hi);border-bottom:none;
+  box-shadow:0 -8px 48px rgba(0,0,0,.5);
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+.sh-handle-area{
+  flex-shrink:0;padding:12px 20px 4px;
+  display:flex;justify-content:center;touch-action:none;cursor:grab;
+}
+.sh-handle-bar{width:40px;height:5px;border-radius:3px;background:var(--border-hi);}
+ 
+.sh-sticky{
+  flex-shrink:0;padding:8px 20px 14px;
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;gap:14px;
+}
+.sh-wnum{font-size:22px;font-weight:800;color:var(--pc,#6366f1);min-width:32px;flex-shrink:0;line-height:1;}
+.sh-wmeta{flex:1;min-width:0;}
+.sh-wtitle{font-size:15px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;}
+.sh-wsub{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--text-3);margin-top:3px;}
+ 
+.sh-tbar{
+  flex-shrink:0;display:flex;padding:0 4px;
+  border-bottom:1px solid var(--border);
+}
+.sh-tbar .tbtn{flex:1;text-align:center;padding:11px 4px;min-height:46px;font-size:10px;}
+ 
+.sh-body{
+  flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
+  overscroll-behavior:contain;padding:16px 18px 28px;
+}
+ 
+.tab-dots{display:flex;justify-content:center;gap:7px;padding:18px 0 4px;}
+.tab-dot{height:5px;width:5px;border-radius:3px;background:var(--border-hi);transition:all .25s cubic-bezier(.4,0,.2,1);}
+.tab-dot.active{width:20px;background:var(--pc,#6366f1);}
+ 
+/* ══════════════════════════════════════
    MOBILE OVERRIDES
-═══════════════════════════════ */
-@media(max-width: 767px) {
-  #mobile-nav { display: block; }
-  .filter-wrap { display: none; }
-  .page { padding: 40px 16px calc(90px + env(safe-area-inset-bottom, 0)); }
-  .week-head { padding: 16px; min-height: auto; }
-  .ckitem { min-height: auto; padding: 16px; }
-  .ckbox { width: 24px; height: 24px; }
-  .litem { padding: 16px; }
-  .pitem { padding: 14px 16px; }
-  .rrow { padding: 16px; }
-  .pdf-strip { padding: 14px 16px; }
-  .btn { min-height: 40px; font-size: 15px; }
-  .narea { font-size: 16px; min-height: 150px; }
-  .stats-grid { grid-template-columns: repeat(2, 1fr); }
-  .tbar { margin: 0 16px; }
-  .tcontent { padding: 16px 16px 20px; }
-  .wgoal { margin: 0 16px 16px; }
+══════════════════════════════════════ */
+@media(max-width:767px){
+  #mobile-nav{display:block;}
+  .filter-wrap{display:none;}
+  .page{padding:32px 14px calc(88px + env(safe-area-inset-bottom,0));}
+  .header{padding-right:56px;}
+  .week-head{padding:16px 16px;min-height:72px;}
+  .week-card:hover{transform:none;box-shadow:var(--shadow-sm);}
+  .week-card:active{transform:scale(.99);}
+  .ckitem{min-height:52px;padding:13px 14px;}
+  .ckbox{width:22px;height:22px;}
+  .litem{min-height:52px;padding:13px 16px;}
+  .pitem{min-height:48px;padding:11px 14px;}
+  .rrow{padding:14px 15px;}
+  .pdf-strip{padding:11px 15px;gap:10px;}
+  .btn{min-height:42px;padding:9px 20px;font-size:12px;}
+  .narea{font-size:16px;min-height:160px;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .cost-grid{grid-template-columns:1fr;}
+  .tbar{margin:12px 16px 0;}
+  .tcontent{padding:14px 16px 20px;}
+  .wgoal{margin:14px 16px 0;}
 }
-/* ───────────────────────────────────────────
+ 
+@media(min-width:768px){
+  #theme-btn{top:22px;right:22px;}
+}
+</style>
+</head>
+<body>
+ 
+<button id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark mode">&#9790;</button>
+<div class="page" id="app"></div>
+<div id="sheet-root"></div>
+<div id="mobile-nav"></div>
+<div id="toast"><div class="toast-inner" id="toast-text"></div></div>
+ 
+<script>
+/* ══════════════════════════════════════
    PHASE DATA
-─────────────────────────────────────────── */
+══════════════════════════════════════ */
 const PHASES=[
-  {id:1, label:'Foundations',    color:'#818cf8', rgb:'129,140,248'},
-  {id:2, label:'Symmetric',      color:'#60a5fa', rgb:'96,165,250'},
-  {id:3, label:'Asymmetric',     color:'#a78bfa', rgb:'167,139,250'},
-  {id:4, label:'Hashing',        color:'#7dd3fc', rgb:'125,211,252'},
-  {id:5, label:'Applied Crypto', color:'#c4b5fd', rgb:'196,181,253'},
-  {id:6, label:'Cryptanalysis',  color:'#f472b6', rgb:'244,114,182'},
-  {id:7, label:'Impl. Security', color:'#818cf8', rgb:'129,140,248'},
-  {id:8, label:'Post-Quantum',   color:'#38bdf8', rgb:'56,189,248'},
-  {id:9, label:'ZKPs',           color:'#a78bfa', rgb:'167,139,250'},
-  {id:10,label:'Formal & PKI',   color:'#6ee7b7', rgb:'110,231,183'},
+  {id:1, label:'Foundations',    color:'#818cf8'},
+  {id:2, label:'Symmetric',      color:'#60a5fa'},
+  {id:3, label:'Asymmetric',     color:'#a78bfa'},
+  {id:4, label:'Hashing',        color:'#7dd3fc'},
+  {id:5, label:'Applied Crypto', color:'#c4b5fd'},
+  {id:6, label:'Cryptanalysis',  color:'#f472b6'},
+  {id:7, label:'Impl. Security', color:'#818cf8'},
+  {id:8, label:'Post-Quantum',   color:'#38bdf8'},
+  {id:9, label:'ZKPs',           color:'#a78bfa'},
+  {id:10,label:'Formal & PKI',   color:'#6ee7b7'},
 ];
  
-/* ───────────────────────────────────────────
+/* ══════════════════════════════════════
    WEEK DATA
-─────────────────────────────────────────── */
+══════════════════════════════════════ */
 const W=[
   {week:1,phase:1,title:'Mathematical & Historical Foundations I',hours:8,
    goal:'Understand the historical arc of cryptography and foundational modular arithmetic.',
@@ -780,10 +907,10 @@ const W=[
    checks:['Can you describe all five stages of a cryptographic key lifecycle?','Did you complete the capstone messaging system with key exchange, AEAD, and signatures?','Can you threat-model a production crypto system and identify three critical failure modes?']},
 ];
  
-/* ───────────────────────────────────────────
-   STATE
-─────────────────────────────────────────── */
-const LS='cmp-v5',LSP='cmp-v5-pdfs';
+/* ══════════════════════════════════════
+   STATE & PERSISTENCE
+══════════════════════════════════════ */
+const LS='cmp-v6', LSP='cmp-v6-pdfs';
 let S={expanded:null,filter:0,checks:{},notes:{},pdfs:{},tabs:{},costOpen:false,sheetWeek:null};
  
 function loadState(){
@@ -795,18 +922,38 @@ function saveState(){
   try{localStorage.setItem(LSP,JSON.stringify(S.pdfs));}catch(e){}
 }
  
-/* ───────────────────────────────────────────
+/* ══════════════════════════════════════
+   THEME
+══════════════════════════════════════ */
+let isDark=true;
+function initTheme(){
+  const saved=localStorage.getItem('cmp-theme');
+  isDark = saved ? saved==='dark' : true;
+  applyTheme();
+}
+function applyTheme(){
+  document.body.classList.toggle('light',!isDark);
+  const btn=document.getElementById('theme-btn');
+  if(btn) btn.innerHTML=isDark?'&#9790;':'&#9788;';
+}
+function toggleTheme(){
+  isDark=!isDark;
+  localStorage.setItem('cmp-theme',isDark?'dark':'light');
+  applyTheme();
+}
+ 
+/* ══════════════════════════════════════
    MOBILE DETECTION
-─────────────────────────────────────────── */
+══════════════════════════════════════ */
 let isMobile=window.innerWidth<768;
 window.addEventListener('resize',()=>{
   const was=isMobile;isMobile=window.innerWidth<768;
   if(was!==isMobile){S.sheetWeek=null;S.expanded=null;render();}
 },{passive:true});
  
-/* ───────────────────────────────────────────
+/* ══════════════════════════════════════
    HELPERS
-─────────────────────────────────────────── */
+══════════════════════════════════════ */
 PHASES.forEach(ph=>{ph.weeks=W.filter(w=>w.phase===ph.id).map(w=>w.week);});
 const phOf=n=>PHASES.find(p=>p.weeks.includes(n))||PHASES[0];
 const esc=s=>(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -817,7 +964,7 @@ function getScore(wn){
 }
 function lvInfo(s,t){
   const p=t?s/t:0;
-  if(!p)   return{l:'Not assessed',c:'rgba(255,255,255,.3)'};
+  if(!p)   return{l:'Not assessed',c:'var(--text-3)'};
   if(p<.4) return{l:'Novice',      c:'#f472b6'};
   if(p<.7) return{l:'Developing',  c:'#818cf8'};
   if(p<1)  return{l:'Solid',       c:'#60a5fa'};
@@ -839,40 +986,38 @@ function openPdf(bk){
   }catch(e){alert('Could not open PDF.\n'+e.message);}
 }
  
-/* ───────────────────────────────────────────
+/* ══════════════════════════════════════
    TOAST
-─────────────────────────────────────────── */
-let _toastTimer=null;
+══════════════════════════════════════ */
+let _tt=null;
 function showToast(msg){
   if(!isMobile)return;
   const t=document.getElementById('toast'),tx=document.getElementById('toast-text');
   if(!t||!tx)return;
   tx.textContent=msg;t.classList.add('show');
-  clearTimeout(_toastTimer);
-  _toastTimer=setTimeout(()=>t.classList.remove('show'),2600);
+  clearTimeout(_tt);_tt=setTimeout(()=>t.classList.remove('show'),2600);
 }
  
-/* ───────────────────────────────────────────
+/* ══════════════════════════════════════
    CONTENT RENDERERS
-─────────────────────────────────────────── */
+══════════════════════════════════════ */
 function renderResources(w){
   const items=w.resources.map(r=>{
     const pdf=r.bookKey?S.pdfs[r.bookKey]:null;
     let strip='';
     if(r.bookKey){
-      strip=`<div class="pdf-strip">
-        ${pdf
-          ?`<span class="pdf-fname">${esc(pdf.name)}</span>
-             <div class="btn-group">
-               <button class="btn btn-a" onclick="openPdf('${r.bookKey}')">Open PDF</button>
-               <button class="btn btn-d" onclick="removePdf('${r.bookKey}')">Remove</button>
-             </div>`
-          :`<span class="pdf-label">Attach your copy:</span>
-             <div class="btn-group">
-               <button class="btn btn-p" onclick="triggerUpload('${r.bookKey}')">Upload PDF</button>
-               ${r.link?`<a href="${r.link}" target="_blank" rel="noopener" class="btn btn-g" style="text-decoration:none">Free online</a>`:''}
-             </div>
-             <input type="file" accept=".pdf" id="fi-${r.bookKey}" style="display:none" onchange="handleUpload('${r.bookKey}',this)">`}
+      strip=`<div class="pdf-strip">${pdf
+        ?`<span class="pdf-fname">${esc(pdf.name)}</span>
+           <div class="btn-group">
+             <button class="btn btn-a" onclick="openPdf('${r.bookKey}')">Open PDF</button>
+             <button class="btn btn-d" onclick="removePdf('${r.bookKey}')">Remove</button>
+           </div>`
+        :`<span class="pdf-label">Attach your copy:</span>
+           <div class="btn-group">
+             <button class="btn btn-p" onclick="triggerUpload('${r.bookKey}')">Upload PDF</button>
+             ${r.link?`<a href="${r.link}" target="_blank" rel="noopener" class="btn btn-g" style="text-decoration:none">Free online</a>`:''}
+           </div>
+           <input type="file" accept=".pdf" id="fi-${r.bookKey}" style="display:none" onchange="handleUpload('${r.bookKey}',this)">`}
       </div>`;
     }else if(r.link){
       strip=`<div class="pdf-strip"><div class="btn-group"><a href="${r.link}" target="_blank" rel="noopener" class="btn btn-g" style="text-decoration:none">Open resource</a></div></div>`;
@@ -891,7 +1036,7 @@ function renderResources(w){
     <div class="pitem">
       <span class="psrc">${esc(p.source)}</span>
       <span class="ptask">${esc(p.task)}</span>
-      ${p.link?`<a href="${p.link}" target="_blank" rel="noopener" class="plink">visit</a>`:''}
+      ${p.link?`<a href="${p.link}" target="_blank" rel="noopener" class="plink">Visit</a>`:''}
     </div>`).join('');
   return`<div class="rlist">${items}</div>
     <div class="psec"><div class="slabel">Practice & Exercises</div>${practice}</div>`;
@@ -935,7 +1080,7 @@ function renderLevel(w){
  
 const TAB_ORDER=['resources','links','notes','level'];
 const TAB_LABELS=['Resources','Links','Notes','Level'];
-function renderTabContent(w,tab){
+function tabContent(w,tab){
   if(tab==='resources')return renderResources(w);
   if(tab==='links')return renderLinks(w);
   if(tab==='notes')return renderNotes(w);
@@ -943,27 +1088,27 @@ function renderTabContent(w,tab){
   return'';
 }
  
-/* ───────────────────────────────────────────
+/* ══════════════════════════════════════
    DESKTOP RENDER
-─────────────────────────────────────────── */
+══════════════════════════════════════ */
 function renderCard(w){
   const ph=phOf(w.week),{s,t}=getScore(w.week),info=lvInfo(s,t);
   const done=s===t&&t>0,open=!isMobile&&S.expanded===w.week;
   const hidden=S.filter!==0&&S.filter!==w.phase;
   const tab=S.tabs[w.week]||'resources';
-  const onclick=isMobile?`openSheet(${w.week})`:`toggleWeek(${w.week})`;
+  const fn=isMobile?`openSheet(${w.week})`:`toggleWeek(${w.week})`;
   return`
-  <div class="week-card glass ${open?'open':''} ${done?'mastered':''} ${hidden?'hidden':''}"
-       id="wc-${w.week}" style="--pc:${ph.color};--pcr:${ph.rgb}">
-    <div class="week-head" onclick="${onclick}">
+  <div class="week-card ${open?'open':''} ${done?'mastered':''} ${hidden?'hidden':''}"
+       id="wc-${w.week}" data-phase="${w.phase}" style="--pc:${ph.color}">
+    <div class="week-head" onclick="${fn}">
       <div class="wnum">${String(w.week).padStart(2,'0')}</div>
       <div class="wmeta">
-        <div class="wtitle">${done?'+ ':''} ${esc(w.title)}</div>
+        <div class="wtitle">${done?'&#10003; ':''} ${esc(w.title)}</div>
         <div class="wtags">
           <span class="tag phase">${ph.label}</span>
           <span class="tag">·</span>
           <span class="tag">${w.hours}h</span>
-          ${s>0?`<span class="tag">·</span><span class="tag lv" style="color:${info.c};border-color:${info.c}44;background:${info.c}12">${info.l}</span>`:''}
+          ${s>0?`<span class="tag">·</span><span class="tag lv" style="color:${info.c};border-color:${info.c}55;background:${info.c}11">${info.l}</span>`:''}
         </div>
       </div>
       <span class="wchev">&#9654;</span>
@@ -973,7 +1118,7 @@ function renderCard(w){
       <div class="tbar">
         ${TAB_ORDER.map((id,i)=>`<button class="tbtn ${tab===id?'active':''}" onclick="switchTab(${w.week},'${id}')">${TAB_LABELS[i]}</button>`).join('')}
       </div>
-      <div class="tcontent active">${renderTabContent(w,tab)}</div>
+      <div class="tcontent active">${tabContent(w,tab)}</div>
     </div>`:''}
   </div>`;
 }
@@ -982,19 +1127,19 @@ function render(){
   const m=masteredCount(),h=W.reduce((a,w)=>a+w.hours,0);
   document.getElementById('app').innerHTML=`
     <div class="header">
-      <div class="eyebrow">A structured programme · 24 Weeks</div>
+      <div class="eyebrow">A structured programme · 24 weeks</div>
       <h1 class="main-title">Cryptography<br>Mastery Plan</h1>
       <p class="sub-title">Mid-Level to Advanced — from classical ciphers to post-quantum standards.</p>
     </div>
     <div class="stats-grid">
       ${[['24','Weeks'],[h+'h','Study Hours'],['$283','Books (max)'],[m+'/24','Mastered']].map(([v,l])=>
-        `<div class="stat-card glass"><div class="sv">${v}</div><div class="sl">${l}</div></div>`).join('')}
+        `<div class="stat-card"><div class="sv">${v}</div><div class="sl">${l}</div></div>`).join('')}
     </div>
-    <div class="prog-card glass">
+    <div class="prog-card">
       <div class="prog-meta"><span>Overall Progress</span><span>${Math.round(m/24*100)}%</span></div>
       <div class="prog-track"><div class="prog-fill" style="width:${m/24*100}%"></div></div>
     </div>
-    <div class="cost-card glass">
+    <div class="cost-card">
       <div class="cost-head" onclick="toggleCost()">
         <span class="cost-head-label">Cost Overview</span>
         <span class="cost-icon ${S.costOpen?'open':''}">&#9660;</span>
@@ -1010,8 +1155,8 @@ function render(){
     <div class="filter-wrap">
       <div class="filter-label">Filter by Phase</div>
       <div class="pill-row">
-        <button class="pill ${S.filter===0?'active':''}" onclick="setFilter(0)">All</button>
-        ${PHASES.map(p=>`<button class="pill ${S.filter===p.id?'active':''}" onclick="setFilter(${p.id})">${p.label}</button>`).join('')}
+        <button class="pill ${S.filter===0?'active':''}" data-id="0" onclick="setFilter(0)">All</button>
+        ${PHASES.map(p=>`<button class="pill ${S.filter===p.id?'active':''}" data-id="${p.id}" onclick="setFilter(${p.id})">${p.label}</button>`).join('')}
       </div>
     </div>
     <div class="week-list">${W.map(renderCard).join('')}</div>
@@ -1022,35 +1167,34 @@ function render(){
   if(isMobile)renderMobileNav();
 }
  
-/* ───────────────────────────────────────────
-   MOBILE NAV
-─────────────────────────────────────────── */
+/* ══════════════════════════════════════
+   MOBILE NAV — initial render only
+══════════════════════════════════════ */
 function renderMobileNav(){
   document.getElementById('mobile-nav').innerHTML=`
     <div class="mnav-track">
-      <button class="mnav-pill ${S.filter===0?'active':''}" onclick="setFilter(0)">All</button>
-      ${PHASES.map(p=>`<button class="mnav-pill ${S.filter===p.id?'active':''}" onclick="setFilter(${p.id})">${p.label}</button>`).join('')}
+      <button class="mnav-pill ${S.filter===0?'active':''}" data-id="0" onclick="setFilter(0)">All</button>
+      ${PHASES.map(p=>`<button class="mnav-pill ${S.filter===p.id?'active':''}" data-id="${p.id}" onclick="setFilter(${p.id})">${p.label}</button>`).join('')}
     </div>`;
 }
  
-/* ───────────────────────────────────────────
-   BOTTOM SHEET — RENDER
-─────────────────────────────────────────── */
+/* ══════════════════════════════════════
+   SHEET RENDER
+══════════════════════════════════════ */
 function renderSheet(animate){
   const root=document.getElementById('sheet-root');
   if(!S.sheetWeek){root.innerHTML='';return;}
-  const w=W.find(x=>x.week===S.sheetWeek);
-  const ph=phOf(w.week);
+  const w=W.find(x=>x.week===S.sheetWeek),ph=phOf(w.week);
   const tab=S.tabs[w.week]||'resources';
   root.innerHTML=`
-    <div class="sh-overlay" id="sh-ov"></div>
-    <div class="sheet" id="main-sheet" style="--pc:${ph.color};--pcr:${ph.rgb}">
-      <div class="sh-handle-area" id="sh-handle"><div class="sh-handle-bar"></div></div>
+    <div class="sh-overlay" onclick="closeSheet()"></div>
+    <div class="sheet" id="ms" style="--pc:${ph.color}">
+      <div class="sh-handle-area"><div class="sh-handle-bar"></div></div>
       <div class="sh-sticky">
         <div class="sh-wnum">${String(w.week).padStart(2,'0')}</div>
         <div class="sh-wmeta">
           <div class="sh-wtitle">${esc(w.title)}</div>
-          <div class="sh-wsub">${ph.label} &nbsp;·&nbsp; ${w.hours}h</div>
+          <div class="sh-wsub">${ph.label} · ${w.hours}h</div>
         </div>
       </div>
       <div class="sh-tbar" id="sh-tbar">
@@ -1058,25 +1202,23 @@ function renderSheet(animate){
       </div>
       <div class="sh-body" id="sh-body">
         <div class="wgoal" style="margin:0 0 14px"><div class="glabel">Weekly Goal</div>${esc(w.goal)}</div>
-        ${renderTabContent(w,tab)}
+        ${tabContent(w,tab)}
         <div class="tab-dots">${TAB_ORDER.map(id=>`<div class="tab-dot ${tab===id?'active':''}"></div>`).join('')}</div>
       </div>
     </div>`;
  
   if(animate){
-    const sheet=document.getElementById('main-sheet');
-    if(sheet){
-      sheet.style.transform='translateY(106%)';
+    const sh=document.getElementById('ms');
+    if(sh){
+      sh.style.transform='translateY(108%)';
       requestAnimationFrame(()=>requestAnimationFrame(()=>{
-        sheet.style.transition='transform .44s cubic-bezier(0.22,1,0.36,1)';
-        sheet.style.transform='translateY(0)';
-        sheet.addEventListener('transitionend',()=>{sheet.style.transition='';},{once:true});
+        sh.style.transition='transform .44s cubic-bezier(0.22,1,0.36,1)';
+        sh.style.transform='translateY(0)';
+        sh.addEventListener('transitionend',()=>{sh.style.transition='';},{once:true});
       }));
     }
   }
- 
-  /* small delay so sheet is in DOM before attaching events */
-  requestAnimationFrame(()=>attachSheetGestures());
+  requestAnimationFrame(()=>attachGestures());
 }
  
 function updateSheetBody(){
@@ -1086,138 +1228,115 @@ function updateSheetBody(){
   const tab=S.tabs[w.week]||'resources';
   body.innerHTML=`
     <div class="wgoal" style="margin:0 0 14px"><div class="glabel">Weekly Goal</div>${esc(w.goal)}</div>
-    ${renderTabContent(w,tab)}
+    ${tabContent(w,tab)}
     <div class="tab-dots">${TAB_ORDER.map(id=>`<div class="tab-dot ${tab===id?'active':''}"></div>`).join('')}</div>`;
   body.scrollTop=0;
 }
  
-/* ───────────────────────────────────────────
-   SHEET GESTURES — PULL-TO-CLOSE + SWIPE TABS
-─────────────────────────────────────────── */
-function attachSheetGestures(){
-  const sheet=document.getElementById('main-sheet');
+/* ══════════════════════════════════════
+   UNIFIED GESTURE SYSTEM — NO DIAGONALS
+   Single state machine; one direction per touch session.
+   pull-to-close: fires when at top AND dragging down.
+   swipe-tabs: fires when strictly horizontal.
+══════════════════════════════════════ */
+function attachGestures(){
+  const sh=document.getElementById('ms');
   const body=document.getElementById('sh-body');
-  if(!sheet||!body)return;
+  if(!sh||!body)return;
  
-  /* ── PULL-TO-CLOSE ──
-     Attached to the entire sheet.
-     Only activates if body.scrollTop===0 AND drag is downward.
-  ───────────────────────────────────────── */
-  let ptcActive=false,ptcStartY=0,ptcCurrentY=0;
+  /* g.dir: 'idle' → 'deciding' → 'v' (vertical) | 'h' (horizontal) */
+  let g={dir:'idle',sx:0,sy:0,dy:0};
  
-  sheet.addEventListener('touchstart',e=>{
-    ptcStartY=e.touches[0].clientY;
-    ptcActive=false;
-    ptcCurrentY=0;
+  sh.addEventListener('touchstart',e=>{
+    g.dir='deciding';
+    g.sx=e.touches[0].clientX;
+    g.sy=e.touches[0].clientY;
+    g.dy=0;
+    sh.style.transition='none';
   },{passive:true});
  
-  sheet.addEventListener('touchmove',e=>{
-    const dy=e.touches[0].clientY-ptcStartY;
-    /* Only engage pull-to-close if scrolled to top and dragging down */
-    if(body.scrollTop<=0 && dy>0){
-      if(!ptcActive){
-        /* Lock in: we are doing a pull-to-close, not a scroll */
-        ptcActive=true;
-        sheet.style.transition='none';
+  sh.addEventListener('touchmove',e=>{
+    if(g.dir==='idle')return;
+    const dx=e.touches[0].clientX-g.sx;
+    const dy=e.touches[0].clientY-g.sy;
+ 
+    /* — Direction lock: decide on first 10px of movement — */
+    if(g.dir==='deciding'){
+      if(Math.abs(dx)>10||Math.abs(dy)>10){
+        /* Strict ratio: horizontal needs to be 1.8× stronger than vertical */
+        g.dir=Math.abs(dx)>Math.abs(dy)*1.8?'h':'v';
       }
+      return;
     }
-    if(ptcActive){
-      ptcCurrentY=dy;
-      /* Move sheet with finger — resist slightly for feel */
-      const resistance=Math.pow(dy,0.8);
-      sheet.style.transform=`translateY(${resistance}px)`;
-      e.preventDefault();
+ 
+    /* — HORIZONTAL: swipe tabs — */
+    if(g.dir==='h'){
+      e.preventDefault(); /* block scroll */
+    }
+ 
+    /* — VERTICAL: pull-to-close only when at scroll top AND dragging down — */
+    if(g.dir==='v'){
+      if(body.scrollTop<=0 && dy>0){
+        g.dy=dy;
+        /* Linear-ish resistance: 0.85 factor feels natural */
+        sh.style.transform=`translateY(${dy*0.85}px)`;
+        e.preventDefault();
+      }
+      /* else: let native scroll run — do NOT preventDefault */
     }
   },{passive:false});
  
-  sheet.addEventListener('touchend',e=>{
-    if(!ptcActive)return;
-    ptcActive=false;
-    const dy=ptcCurrentY;
-    sheet.style.transition='transform .35s cubic-bezier(.4,0,.2,1)';
-    if(dy>120){
-      /* dismiss */
-      sheet.style.transform='translateY(110%)';
-      setTimeout(closeSheet,360);
-    }else{
-      /* snap back */
-      sheet.style.transform='translateY(0)';
-      sheet.addEventListener('transitionend',()=>{sheet.style.transition='';},{once:true});
-    }
-  },{passive:true});
- 
-  /* ── SWIPE BETWEEN TABS ──
-     Direction-locked state machine.
-     Horizontal swipes intercepted on touchmove → preventDefault.
-     Vertical scrolling passes through untouched.
-  ───────────────────────────────────────── */
-  let sw={state:'idle',startX:0,startY:0,lastX:0};
-  /* 'idle' → 'deciding' → 'horizontal' | 'vertical' */
- 
-  body.addEventListener('touchstart',e=>{
-    sw.state='deciding';
-    sw.startX=e.touches[0].clientX;
-    sw.startY=e.touches[0].clientY;
-    sw.lastX=sw.startX;
-  },{passive:true});
- 
-  body.addEventListener('touchmove',e=>{
-    if(sw.state==='vertical')return; /* let scroll happen */
- 
-    const dx=e.touches[0].clientX-sw.startX;
-    const dy=e.touches[0].clientY-sw.startY;
-    sw.lastX=e.touches[0].clientX;
- 
-    if(sw.state==='deciding'){
-      if(Math.abs(dx)>8||Math.abs(dy)>8){
-        sw.state=Math.abs(dx)>Math.abs(dy)*1.1?'horizontal':'vertical';
+  sh.addEventListener('touchend',e=>{
+    if(g.dir==='h'){
+      const dx=e.changedTouches[0].clientX-g.sx;
+      if(Math.abs(dx)>=50){
+        const cur=S.tabs[S.sheetWeek]||'resources';
+        const idx=TAB_ORDER.indexOf(cur);
+        if(dx<0&&idx<TAB_ORDER.length-1) mSwitchTab(S.sheetWeek,TAB_ORDER[idx+1]);
+        else if(dx>0&&idx>0) mSwitchTab(S.sheetWeek,TAB_ORDER[idx-1]);
       }
     }
-    if(sw.state==='horizontal'){
-      /* Block scroll while we handle the horizontal gesture */
-      e.preventDefault();
-    }
-  },{passive:false});
  
-  body.addEventListener('touchend',e=>{
-    if(sw.state!=='horizontal'){sw.state='idle';return;}
-    const dx=e.changedTouches[0].clientX-sw.startX;
-    sw.state='idle';
-    if(Math.abs(dx)<50)return; /* too short */
-    const cur=S.tabs[S.sheetWeek]||'resources';
-    const idx=TAB_ORDER.indexOf(cur);
-    if(dx<0&&idx<TAB_ORDER.length-1){
-      mSwitchTab(S.sheetWeek,TAB_ORDER[idx+1]);
-    }else if(dx>0&&idx>0){
-      mSwitchTab(S.sheetWeek,TAB_ORDER[idx-1]);
+    if(g.dir==='v' && g.dy>0){
+      sh.style.transition='transform .33s cubic-bezier(.4,0,.2,1)';
+      if(g.dy>75){
+        sh.style.transform='translateY(110%)';
+        setTimeout(closeSheet,340);
+      }else{
+        sh.style.transform='translateY(0)';
+        sh.addEventListener('transitionend',()=>{sh.style.transition='';},{once:true});
+      }
+    }else if(g.dir==='v'){
+      /* ensure sheet stays in place if we never triggered pull */
+      sh.style.transform='translateY(0)';
     }
+ 
+    g.dir='idle';
   },{passive:true});
 }
  
-/* ───────────────────────────────────────────
+/* ══════════════════════════════════════
    ACTIONS
-─────────────────────────────────────────── */
+══════════════════════════════════════ */
 function toggleWeek(n){
   if(isMobile){openSheet(n);return;}
   S.expanded=S.expanded===n?null:n;
   if(!S.tabs[n])S.tabs[n]='resources';
   saveState();render();
-  if(S.expanded===n)setTimeout(()=>document.getElementById('wc-'+n)?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+  if(S.expanded===n) setTimeout(()=>document.getElementById('wc-'+n)?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 }
  
 function switchTab(wn,t){S.tabs[wn]=t;saveState();render();}
  
 function mSwitchTab(wn,t){
   S.tabs[wn]=t;saveState();
-  /* update tab btn active states */
   document.querySelectorAll('#sh-tbar .tbtn').forEach((btn,i)=>btn.classList.toggle('active',TAB_ORDER[i]===t));
   updateSheetBody();
 }
  
 function openSheet(wn){
   if(!S.tabs[wn])S.tabs[wn]='resources';
-  S.sheetWeek=wn;saveState();
-  renderSheet(true);
+  S.sheetWeek=wn;saveState();renderSheet(true);
 }
  
 function closeSheet(){
@@ -1226,49 +1345,62 @@ function closeSheet(){
   render();
 }
  
+/* ── FIX: setFilter does NOT re-render nav → no scroll jump ── */
 function setFilter(id){
-  S.filter=id;saveState();render();
-  if(isMobile)renderMobileNav();
+  S.filter=id;saveState();
+ 
+  /* Update pill active states in-place — no scroll reset */
+  document.querySelectorAll('[data-id]').forEach(el=>{
+    el.classList.toggle('active',+el.dataset.id===id);
+  });
+ 
+  /* Show/hide cards in-place */
+  document.querySelectorAll('.week-card[data-phase]').forEach(card=>{
+    const ph=+card.dataset.phase;
+    card.classList.toggle('hidden',id!==0&&ph!==id);
+  });
 }
  
 function toggleCost(){S.costOpen=!S.costOpen;saveState();render();}
  
+/* ── FIX: mastered note synced with actual check state ── */
 function toggleCheck(wn,qi){
   const key=`${wn}-${qi}`;
   S.checks[key]=!S.checks[key];
   saveState();
  
   if(isMobile&&S.sheetWeek===wn){
-    /* ── DOM-patch the check item ── */
+    /* 1. Toggle check item class */
     const item=document.querySelector(`[data-wn="${wn}"][data-qi="${qi}"]`);
     if(item){
       item.classList.toggle('on',!!S.checks[key]);
       const box=item.querySelector('.ckbox');
-      if(box){
-        box.classList.remove('pop');
-        void box.offsetWidth;
-        box.classList.add('pop');
-        box.addEventListener('animationend',()=>box.classList.remove('pop'),{once:true});
-      }
+      if(box){box.classList.remove('pop');void box.offsetWidth;box.classList.add('pop');
+        box.addEventListener('animationend',()=>box.classList.remove('pop'),{once:true});}
     }
-    /* ── Update level badge ── */
-    const{s,t}=getScore(wn),info=lvInfo(s,t);
+    /* 2. Update badge */
+    const{s,t}=getScore(wn);const info=lvInfo(s,t);
     const ln=document.querySelector('.lvname');
     const lf=document.querySelector('.lvfrac');
     const lb=document.querySelector('.lvbar');
     if(ln){ln.textContent=info.l;ln.style.color=info.c;}
     if(lf)lf.innerHTML=`${s}<small>/${t}</small>`;
     if(lb){lb.style.width=`${t?s/t*100:0}%`;lb.style.background=info.c;}
-    /* ── Mastered? ── */
-    const{s:s2,t:t2}=getScore(wn);
-    if(s2===t2&&t2>0){
-      if(!document.querySelector('.mastered-note')){
-        const ck=document.querySelector('.cklist');
-        if(ck){const el=document.createElement('div');el.className='mastered-note';el.textContent=`Week ${wn} complete — ready to advance.`;ck.insertAdjacentElement('afterend',el);}
-      }
+ 
+    /* 3. ── FIX: mastered note appears AND disappears reactively ── */
+    const done=s===t&&t>0;
+    const existing=document.querySelector('.mastered-note');
+    if(done&&!existing){
+      const ck=document.querySelector('.cklist');
+      if(ck){const el=document.createElement('div');el.className='mastered-note';
+        el.textContent=`Week ${wn} complete — ready to advance.`;
+        ck.insertAdjacentElement('afterend',el);}
       showToast('Week '+wn+' mastered');
+    }else if(!done&&existing){
+      existing.remove();
     }
-    /* ── Update the background card + progress ── */
+ 
+    /* 4. Update list card + progress bar */
     updateCardInList(wn);
     updateProgressBar();
   }else{
@@ -1282,17 +1414,14 @@ function saveNote(wn,v){
 }
 function clearNote(wn){
   S.notes[wn]='';saveState();
-  if(isMobile&&S.sheetWeek===wn)updateSheetBody();
-  else render();
+  if(isMobile&&S.sheetWeek===wn)updateSheetBody();else render();
 }
 function triggerUpload(bk){document.getElementById('fi-'+bk)?.click();}
 function handleUpload(bk,inp){
   const f=inp.files[0];if(!f)return;
   const r=new FileReader();
-  r.onload=e=>{
-    S.pdfs[bk]={name:f.name,url:e.target.result};saveState();
-    if(isMobile&&S.sheetWeek)updateSheetBody();else render();
-  };
+  r.onload=e=>{S.pdfs[bk]={name:f.name,url:e.target.result};saveState();
+    if(isMobile&&S.sheetWeek)updateSheetBody();else render();};
   r.readAsDataURL(f);
 }
 function removePdf(bk){
@@ -1316,10 +1445,11 @@ function updateProgressBar(){
   if(sv)sv.textContent=`${m}/24`;
 }
  
-/* ───────────────────────────────────────────
+/* ══════════════════════════════════════
    BOOT
-─────────────────────────────────────────── */
+══════════════════════════════════════ */
 loadState();
+initTheme();
 render();
 </script>
 </body>
