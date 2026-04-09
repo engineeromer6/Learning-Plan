@@ -24,6 +24,7 @@
   --prog-bg:   linear-gradient(90deg,#6366f1,#8b5cf6);
   --r-card:    16px;
   --r-inner:   10px;
+  --accent:    #6366f1;
   color-scheme: dark;
 }
 body.light {
@@ -54,21 +55,23 @@ body{
   color:var(--text);background:var(--bg);
   overflow-x:hidden;transition:background .25s,color .25s;
 }
+/* Scroll lock when modal open */
+body.modal-open{overflow:hidden;}
 
 /* ══════════════════════════════════════
-   THEME TOGGLE BUTTON
+   THEME TOGGLE
 ══════════════════════════════════════ */
 #theme-btn{
-  position:fixed;top:18px;right:18px;z-index:999;
-  width:40px;height:40px;border-radius:50%;
+  position:fixed;top:16px;left:16px;z-index:999;
+  width:48px;height:48px;border-radius:50%;
   background:var(--surface);border:1px solid var(--border-hi);
-  color:var(--text-2);font-size:16px;cursor:pointer;
+  color:var(--text-2);font-size:20px;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
-  box-shadow:var(--shadow-sm);
-  transition:background .2s,color .2s,border-color .2s,transform .15s;
+  box-shadow:var(--shadow-md);
+  transition:background .2s,color .2s,transform .15s;
 }
 #theme-btn:hover{color:var(--text);background:var(--surface-2);}
-#theme-btn:active{transform:scale(.9);}
+#theme-btn:active{transform:scale(.88);}
 
 /* ══════════════════════════════════════
    LAYOUT
@@ -78,34 +81,23 @@ body{
 /* ══════════════════════════════════════
    HEADER
 ══════════════════════════════════════ */
-.header{margin-bottom:36px;padding-right:52px;}
+.header{margin-bottom:36px;padding-right:60px;}
 .eyebrow{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;font-weight:500;}
-.main-title{
-  font-size:clamp(30px,6vw,46px);font-weight:800;line-height:1.12;
-  letter-spacing:-1px;color:var(--text);margin-bottom:8px;
-}
+.main-title{font-size:clamp(30px,6vw,46px);font-weight:800;line-height:1.12;letter-spacing:-1px;color:var(--text);margin-bottom:8px;}
 .sub-title{font-size:clamp(13px,2vw,15px);color:var(--text-2);font-weight:400;}
 
 /* ══════════════════════════════════════
    STATS
 ══════════════════════════════════════ */
 .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px;}
-.stat-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r-card);padding:16px 14px;text-align:center;
-  box-shadow:var(--shadow-sm);
-}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:16px 14px;text-align:center;box-shadow:var(--shadow-sm);}
 .sv{font-size:clamp(18px,3.5vw,24px);font-weight:700;color:var(--text);line-height:1;}
 .sl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--text-3);margin-top:5px;}
 
 /* ══════════════════════════════════════
    PROGRESS
 ══════════════════════════════════════ */
-.prog-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r-card);padding:16px 20px;margin-bottom:12px;
-  box-shadow:var(--shadow-sm);
-}
+.prog-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);padding:16px 20px;margin-bottom:12px;box-shadow:var(--shadow-sm);}
 .prog-meta{display:flex;justify-content:space-between;font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-2);margin-bottom:10px;}
 .prog-track{height:4px;background:var(--border-hi);border-radius:2px;overflow:hidden;}
 .prog-fill{height:100%;border-radius:2px;background:var(--prog-bg);transition:width .5s cubic-bezier(.4,0,.2,1);}
@@ -113,15 +105,8 @@ body{
 /* ══════════════════════════════════════
    COST BOX
 ══════════════════════════════════════ */
-.cost-card{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--r-card);margin-bottom:20px;overflow:hidden;
-  box-shadow:var(--shadow-sm);
-}
-.cost-head{
-  padding:14px 20px;display:flex;justify-content:space-between;align-items:center;
-  cursor:pointer;user-select:none;transition:background .15s;
-}
+.cost-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-card);margin-bottom:20px;overflow:hidden;box-shadow:var(--shadow-sm);}
+.cost-head{padding:14px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;transition:background .15s;}
 .cost-head:hover{background:var(--surface-2);}
 .cost-head-label{font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text-2);}
 .cost-icon{font-size:11px;color:var(--text-3);transition:transform .22s;}
@@ -137,24 +122,18 @@ body{
 .free-hi{color:#6ee7b7;}
 
 /* ══════════════════════════════════════
-   FILTER PILLS
+   FILTER PILLS (desktop)
 ══════════════════════════════════════ */
 .filter-wrap{margin-bottom:22px;}
 .filter-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;}
 .pill-row{display:flex;flex-wrap:wrap;gap:7px;}
-.pill{
-  padding:6px 16px;border-radius:999px;font-size:11px;font-weight:600;
-  letter-spacing:.5px;text-transform:uppercase;cursor:pointer;
-  border:1px solid var(--border-hi);color:var(--text-2);
-  background:var(--surface);transition:all .15s;
-  box-shadow:var(--shadow-sm);
-}
+.pill{padding:6px 16px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;border:1px solid var(--border-hi);color:var(--text-2);background:var(--surface);transition:all .15s;box-shadow:var(--shadow-sm);}
 .pill:hover{background:var(--surface-2);color:var(--text);}
-.pill:active{transform:scale(.93);transition:transform .07s;}
+.pill:active{transform:scale(.93);}
 .pill.active{background:var(--text);color:var(--bg);border-color:var(--text);}
 
 /* ══════════════════════════════════════
-   WEEK CARDS
+   WEEK CARDS (list)
 ══════════════════════════════════════ */
 .week-list{display:flex;flex-direction:column;gap:8px;}
 .week-card{
@@ -170,54 +149,42 @@ body{
 .week-head{
   display:flex;align-items:center;gap:14px;padding:16px 20px;
   cursor:pointer;user-select:none;
-  border-left:3px solid var(--pc,#6366f1);
+  border-left:3px solid var(--pc,var(--accent));
   transition:background .15s;
 }
 .week-head:hover{background:var(--surface-2);}
+
+/* ── PLAIN number — no phase color ── */
 .wnum{
-  font-size:22px;font-weight:800;line-height:1;color:var(--pc,#6366f1);
-  min-width:34px;flex-shrink:0;font-variant-numeric:tabular-nums;
+  font-size:22px;font-weight:800;line-height:1;
+  color:var(--text-2);          /* plain, not --pc */
+  min-width:34px;flex-shrink:0;
+  font-variant-numeric:tabular-nums;
 }
 .wmeta{flex:1;min-width:0;}
-.wtitle{
-  font-size:14px;font-weight:600;color:var(--text);
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-  line-height:1.35;margin-bottom:4px;
-}
+.wtitle{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.35;margin-bottom:4px;}
 .week-card.mastered .wtitle{color:var(--text-3);text-decoration:line-through;}
 .wtags{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
 .tag{font-size:11px;color:var(--text-3);letter-spacing:.3px;}
-.tag.phase{color:var(--pc,#6366f1);font-weight:700;}
-.tag.lv{
-  padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;
-  border:1px solid;
-}
+.tag.phase{color:var(--pc,var(--accent));font-weight:700;}
+.tag.lv{padding:2px 8px;border-radius:999px;font-size:10px;font-weight:600;border:1px solid;}
 .wchev{font-size:10px;color:var(--text-3);flex-shrink:0;transition:transform .22s cubic-bezier(.4,0,.2,1);}
 .week-card.open .wchev{transform:rotate(90deg);}
 
-/* expanded body */
+/* desktop expanded body */
 .wbody{display:none;border-top:1px solid var(--border);}
 .week-card.open .wbody{display:block;}
-.wgoal{
-  margin:16px 20px 0;padding:12px 16px 12px 18px;
-  border-left:3px solid var(--pc,#6366f1);border-radius:0 var(--r-inner) var(--r-inner) 0;
-  background:var(--surface-2);font-size:13px;color:var(--text-2);line-height:1.7;
-}
-.glabel{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pc,#6366f1);margin-bottom:4px;}
+.wgoal{margin:16px 20px 0;padding:12px 16px 12px 18px;border-left:3px solid var(--pc,var(--accent));border-radius:0 var(--r-inner) var(--r-inner) 0;background:var(--surface-2);font-size:13px;color:var(--text-2);line-height:1.7;}
+.glabel{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pc,var(--accent));margin-bottom:4px;}
 
 /* ══════════════════════════════════════
    TABS
 ══════════════════════════════════════ */
 .tbar{display:flex;margin:14px 20px 0;border-bottom:1px solid var(--border);}
-.tbtn{
-  padding:8px 14px;font-size:11px;font-weight:600;letter-spacing:.8px;
-  text-transform:uppercase;color:var(--text-3);background:none;border:none;
-  border-bottom:2px solid transparent;margin-bottom:-1px;
-  cursor:pointer;font-family:inherit;transition:color .15s,border-color .15s;
-}
+.tbtn{padding:8px 14px;font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--text-3);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;font-family:inherit;transition:color .15s,border-color .15s;}
 .tbtn:hover{color:var(--text-2);}
-.tbtn:active{transform:scale(.95);transition:transform .07s;}
-.tbtn.active{color:var(--text);border-bottom-color:var(--pc,#6366f1);}
+.tbtn:active{transform:scale(.95);}
+.tbtn.active{color:var(--text);border-bottom-color:var(--pc,var(--accent));}
 .tcontent{display:none;padding:16px 20px 22px;}
 .tcontent.active{display:block;}
 
@@ -225,88 +192,49 @@ body{
    RESOURCES
 ══════════════════════════════════════ */
 .rlist{display:flex;flex-direction:column;gap:8px;}
-.ritem{
-  border-radius:var(--r-inner);overflow:hidden;
-  background:var(--surface-2);border:1px solid var(--border);
-}
+.ritem{border-radius:var(--r-inner);overflow:hidden;background:var(--surface-2);border:1px solid var(--border);}
 .rrow{display:flex;align-items:flex-start;gap:12px;padding:13px 15px;}
-.rtype{
-  font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
-  padding:3px 8px;border-radius:999px;
-  background:var(--surface-3);color:var(--text-2);
-  border:1px solid var(--border);white-space:nowrap;flex-shrink:0;margin-top:2px;
-}
+.rtype{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:999px;background:var(--surface-3);color:var(--text-2);border:1px solid var(--border);white-space:nowrap;flex-shrink:0;margin-top:2px;}
 .rinfo{flex:1;min-width:0;}
 .rname{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;}
 .rauthor{font-size:11px;color:var(--text-3);font-style:italic;margin-top:2px;}
 .rdesc{font-size:12px;color:var(--text-2);margin-top:3px;line-height:1.5;}
-
-.pdf-strip{
-  padding:10px 15px;background:var(--surface-3);border-top:1px solid var(--border);
-  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
-}
+.pdf-strip{padding:10px 15px;background:var(--surface-3);border-top:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .pdf-label{font-size:12px;color:var(--text-3);}
 .pdf-fname{font-size:12px;color:var(--text-2);flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
 .psec{margin-top:16px;}
 .slabel{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:8px;}
-.pitem{
-  display:flex;align-items:flex-start;gap:10px;padding:10px 14px;
-  border-radius:var(--r-inner);background:var(--surface-2);border:1px solid var(--border);margin-bottom:6px;
-}
-.psrc{font-size:10px;font-weight:700;color:var(--pc,#6366f1);white-space:nowrap;padding-top:2px;flex-shrink:0;}
+.pitem{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border-radius:var(--r-inner);background:var(--surface-2);border:1px solid var(--border);margin-bottom:6px;}
+.psrc{font-size:10px;font-weight:700;color:var(--pc,var(--accent));white-space:nowrap;padding-top:2px;flex-shrink:0;}
 .ptask{font-size:12px;color:var(--text-2);flex:1;line-height:1.5;}
-/* visit link — framed pill */
-.plink{
-  font-size:11px;font-weight:600;color:var(--pc,#6366f1);text-decoration:none;
-  flex-shrink:0;align-self:center;
-  padding:4px 12px;border-radius:999px;
-  border:1px solid var(--border-hi);background:var(--surface-3);
-  transition:background .15s,border-color .15s;
-}
-.plink:hover{background:var(--surface-2);border-color:var(--pc,#6366f1);}
+.plink{font-size:11px;font-weight:600;color:var(--pc,var(--accent));text-decoration:none;flex-shrink:0;align-self:center;padding:4px 12px;border-radius:999px;border:1px solid var(--border-hi);background:var(--surface-3);transition:background .15s,border-color .15s;}
+.plink:hover{background:var(--surface-2);border-color:var(--pc,var(--accent));}
 
 /* ══════════════════════════════════════
-   BUTTONS & GROUPS
+   BUTTONS
 ══════════════════════════════════════ */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:5px;
-  min-height:38px;padding:8px 20px;border-radius:999px;
-  font-size:12px;font-weight:600;letter-spacing:.4px;
-  cursor:pointer;border:1px solid transparent;font-family:inherit;white-space:nowrap;
-  transition:background .15s,filter .15s,border-color .15s;
-}
-.btn:active{transform:scale(.92);transition:transform .07s cubic-bezier(.4,0,.2,1);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;min-height:38px;padding:8px 20px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.4px;cursor:pointer;border:1px solid transparent;font-family:inherit;white-space:nowrap;transition:background .15s,filter .15s,border-color .15s;}
+.btn:active{transform:scale(.92);}
 .btn-p{background:var(--surface-2);border-color:var(--border-hi);color:var(--text);}
 .btn-p:hover{background:var(--surface-3);}
-.btn-a{background:var(--pc,#6366f1);border-color:var(--pc,#6366f1);color:#fff;}
+.btn-a{background:var(--pc,var(--accent));border-color:var(--pc,var(--accent));color:#fff;}
 .btn-a:hover{filter:brightness(1.12);}
 .btn-g{background:transparent;border-color:var(--border-hi);color:var(--text-2);}
 .btn-g:hover{background:var(--surface-2);color:var(--text);}
 .btn-d{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.25);color:#fca5a5;}
 .btn-d:hover{background:rgba(239,68,68,.18);}
-
-.btn-group{
-  display:inline-flex;align-items:center;gap:5px;
-  background:var(--surface-3);border:1px solid var(--border-hi);
-  border-radius:999px;padding:4px;
-}
+.btn-group{display:inline-flex;align-items:center;gap:5px;background:var(--surface-3);border:1px solid var(--border-hi);border-radius:999px;padding:4px;}
 .btn-group .btn{min-height:32px;padding:5px 14px;font-size:11px;}
 
 /* ══════════════════════════════════════
    LINKS TAB
 ══════════════════════════════════════ */
 .llist{display:flex;flex-direction:column;gap:6px;}
-.litem{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:12px 16px;border-radius:var(--r-inner);
-  background:var(--surface-2);border:1px solid var(--border);
-  text-decoration:none;transition:background .15s,transform .12s;
-}
+.litem{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-radius:var(--r-inner);background:var(--surface-2);border:1px solid var(--border);text-decoration:none;transition:background .15s,transform .12s;}
 .litem:hover{background:var(--surface-3);transform:translateX(3px);}
 .litem:active{transform:scale(.98);}
 .lname{font-size:13px;color:var(--text);display:flex;align-items:center;gap:9px;}
-.larrow{color:var(--pc,#6366f1);font-size:13px;}
+.larrow{color:var(--pc,var(--accent));font-size:13px;}
 .ldomain{font-family:'Courier New',monospace;font-size:10px;color:var(--text-3);}
 
 /* ══════════════════════════════════════
@@ -314,25 +242,15 @@ body{
 ══════════════════════════════════════ */
 .nhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
 .ncount{font-family:'Courier New',monospace;font-size:10px;color:var(--text-3);}
-.narea{
-  width:100%;min-height:140px;resize:vertical;
-  background:var(--surface-2);border:1px solid var(--border-hi);
-  border-radius:var(--r-inner);padding:12px 15px;
-  font-size:13px;font-family:inherit;color:var(--text);line-height:1.7;
-  outline:none;transition:border-color .2s,box-shadow .2s;
-}
+.narea{width:100%;min-height:140px;resize:vertical;background:var(--surface-2);border:1px solid var(--border-hi);border-radius:var(--r-inner);padding:12px 15px;font-size:13px;font-family:inherit;color:var(--text);line-height:1.7;outline:none;transition:border-color .2s,box-shadow .2s;}
 .narea::placeholder{color:var(--text-3);font-style:italic;}
-.narea:focus{border-color:var(--pc,#6366f1);box-shadow:0 0 0 3px rgba(99,102,241,.1);}
+.narea:focus{border-color:var(--pc,var(--accent));box-shadow:0 0 0 3px rgba(99,102,241,.1);}
 .nact{display:flex;justify-content:flex-end;margin-top:8px;}
 
 /* ══════════════════════════════════════
    LEVEL CHECK
 ══════════════════════════════════════ */
-.lvbadge{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 18px;border-radius:var(--r-inner);
-  background:var(--surface-2);border:1px solid var(--border);margin-bottom:12px;
-}
+.lvbadge{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-radius:var(--r-inner);background:var(--surface-2);border:1px solid var(--border);margin-bottom:12px;}
 .lvlabel{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-3);margin-bottom:4px;}
 .lvname{font-size:17px;font-weight:700;}
 .lvfrac{font-size:26px;font-weight:800;color:var(--text-2);line-height:1;}
@@ -340,33 +258,18 @@ body{
 .lvtrack{height:4px;background:var(--border-hi);border-radius:2px;overflow:hidden;margin-bottom:16px;}
 .lvbar{height:100%;border-radius:2px;transition:width .4s cubic-bezier(.4,0,.2,1);}
 .cklist{display:flex;flex-direction:column;gap:6px;}
-.ckitem{
-  display:flex;align-items:flex-start;gap:12px;padding:12px 14px;
-  border-radius:var(--r-inner);background:var(--surface-2);border:1px solid var(--border);
-  border-left:2px solid transparent;cursor:pointer;text-align:left;width:100%;
-  font-family:inherit;color:inherit;
-  transition:background .15s,border-color .15s;
-}
+.ckitem{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--r-inner);background:var(--surface-2);border:1px solid var(--border);border-left:2px solid transparent;cursor:pointer;text-align:left;width:100%;font-family:inherit;color:inherit;transition:background .15s,border-color .15s;}
 .ckitem:hover{background:var(--surface-3);}
 .ckitem:active{transform:scale(.98);}
-.ckitem.on{background:var(--surface-3);border-left-color:var(--pc,#6366f1);border-color:var(--border-hi);}
-.ckbox{
-  width:20px;height:20px;border-radius:50%;border:2px solid var(--border-hi);
-  background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;
-  margin-top:1px;transition:all .18s cubic-bezier(.4,0,.2,1);
-}
-.ckitem.on .ckbox{background:var(--pc,#6366f1);border-color:var(--pc,#6366f1);}
+.ckitem.on{background:var(--surface-3);border-left-color:var(--pc,var(--accent));border-color:var(--border-hi);}
+.ckbox{width:20px;height:20px;border-radius:50%;border:2px solid var(--border-hi);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:all .18s cubic-bezier(.4,0,.2,1);}
+.ckitem.on .ckbox{background:var(--pc,var(--accent));border-color:var(--pc,var(--accent));}
 .cktick{display:none;color:#fff;font-size:11px;font-weight:800;line-height:1;}
 .ckitem.on .cktick{display:block;}
 .cktxt{font-size:12px;color:var(--text-2);line-height:1.6;transition:color .15s;}
 .ckitem.on .cktxt{color:var(--text);}
-.mastered-note{
-  margin-top:12px;padding:10px 14px;border-radius:var(--r-inner);
-  background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.2);
-  color:#6ee7b7;font-size:12px;text-align:center;font-style:italic;
-}
+.mastered-note{margin-top:12px;padding:10px 14px;border-radius:var(--r-inner);background:rgba(110,231,183,.08);border:1px solid rgba(110,231,183,.2);color:#6ee7b7;font-size:12px;text-align:center;font-style:italic;}
 
-/* ── CHECKBOX BOUNCE ── */
 @keyframes ck-pop{
   0%  {transform:scale(1);}
   30% {transform:scale(1.45);}
@@ -379,17 +282,14 @@ body{
 /* ══════════════════════════════════════
    FOOTER
 ══════════════════════════════════════ */
-.footer{
-  margin-top:40px;padding-top:20px;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;font-size:11px;
-  color:var(--text-3);flex-wrap:wrap;gap:8px;letter-spacing:.5px;
-}
+.footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:11px;color:var(--text-3);flex-wrap:wrap;gap:8px;letter-spacing:.5px;}
 
 /* ══════════════════════════════════════
    MOBILE — BOTTOM NAV
+   z-index: 400 — above the modal overlay (300) so it stays tappable
 ══════════════════════════════════════ */
 #mobile-nav{
-  display:none;position:fixed;bottom:0;left:0;right:0;z-index:100;
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:400;
   background:rgba(var(--nav-bg,13,15,26),.9);
   backdrop-filter:blur(24px) saturate(180%);
   -webkit-backdrop-filter:blur(24px) saturate(180%);
@@ -398,90 +298,107 @@ body{
   box-shadow:0 -4px 24px rgba(0,0,0,.35);
 }
 body.light #mobile-nav{--nav-bg:237,240,248;}
-.mnav-track{
-  display:flex;overflow-x:auto;padding:11px 16px;gap:9px;
-  scrollbar-width:none;-ms-overflow-style:none;
-}
+.mnav-track{display:flex;overflow-x:auto;padding:11px 16px;gap:9px;scrollbar-width:none;-ms-overflow-style:none;}
 .mnav-track::-webkit-scrollbar{display:none;}
-.mnav-pill{
-  flex-shrink:0;min-height:44px;padding:9px 20px;
-  border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.5px;
-  text-transform:uppercase;cursor:pointer;
-  border:1px solid var(--border-hi);color:var(--text-2);
-  background:var(--surface);
-  display:flex;align-items:center;white-space:nowrap;
-  -webkit-tap-highlight-color:transparent;
-  transition:background .15s,color .15s,border-color .15s;
-}
-.mnav-pill:active{transform:scale(.93);transition:transform .07s cubic-bezier(.4,0,.2,1);}
+.mnav-pill{flex-shrink:0;min-height:44px;padding:9px 20px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;cursor:pointer;border:1px solid var(--border-hi);color:var(--text-2);background:var(--surface);display:flex;align-items:center;white-space:nowrap;-webkit-tap-highlight-color:transparent;transition:background .15s,color .15s,border-color .15s;}
+.mnav-pill:active{transform:scale(.93);}
 .mnav-pill.active{background:var(--text);color:var(--bg);border-color:var(--text);}
 
 /* ══════════════════════════════════════
-   TOAST
+   TOAST — repositioned, black/white
 ══════════════════════════════════════ */
 #toast{
-  position:fixed;bottom:90px;left:50%;
-  transform:translateX(-50%) translateY(14px);
+  position:fixed;
+  bottom:160px;   /* well above the modal footer / mastered-note */
+  left:50%;
+  transform:translateX(-50%) translateY(12px);
   z-index:500;pointer-events:none;opacity:0;
   transition:opacity .26s,transform .26s cubic-bezier(.22,1,.36,1);
+  white-space:nowrap;
 }
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 .toast-inner{
-  padding:10px 22px;border-radius:999px;font-size:13px;font-weight:600;
-  background:rgba(110,231,183,.18);border:1px solid rgba(110,231,183,.35);
-  color:#a7f3d0;backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
-  box-shadow:0 4px 20px rgba(0,0,0,.3);
+  padding:10px 24px;border-radius:999px;font-size:13px;font-weight:600;
+  /* black / white — no colour */
+  background:var(--text);color:var(--bg);
+  box-shadow:0 4px 20px rgba(0,0,0,.35);
 }
 
 /* ══════════════════════════════════════
-   SHEET OVERLAY
+   MODAL OVERLAY
+   z-index: 300 — below nav (400), above page
 ══════════════════════════════════════ */
-.sh-overlay{
-  position:fixed;inset:0;z-index:200;
-  background:rgba(0,0,0,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+.modal-overlay{
+  position:fixed;inset:0;z-index:300;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  padding:16px 16px calc(70px + env(safe-area-inset-bottom,0)) 16px;
 }
 
 /* ══════════════════════════════════════
-   BOTTOM SHEET
+   CENTERED MODAL CARD
 ══════════════════════════════════════ */
-.sheet{
-  position:fixed;bottom:0;left:0;right:0;z-index:300;
-  height:88vh;display:flex;flex-direction:column;
-  border-radius:20px 20px 0 0;overflow:hidden;will-change:transform;
-  background:var(--surface);border:1px solid var(--border-hi);border-bottom:none;
-  box-shadow:0 -8px 48px rgba(0,0,0,.5);
-  padding-bottom:env(safe-area-inset-bottom,0);
+.modal-card{
+  position:relative;
+  width:min(92vw,620px);
+  max-height:82vh;
+  display:flex;flex-direction:column;
+  border-radius:20px;overflow:hidden;
+  background:var(--surface);border:1px solid var(--border-hi);
+  box-shadow:0 24px 80px rgba(0,0,0,.7),0 0 0 .5px rgba(255,255,255,.06);
+  /* scale-in animation */
+  animation:modal-in .3s cubic-bezier(0.22,1,0.36,1) both;
 }
-.sh-handle-area{
-  flex-shrink:0;padding:12px 20px 4px;
-  display:flex;justify-content:center;touch-action:none;cursor:grab;
+@keyframes modal-in{
+  from{opacity:0;transform:scale(.93);}
+  to  {opacity:1;transform:scale(1);}
 }
-.sh-handle-bar{width:40px;height:5px;border-radius:3px;background:var(--border-hi);}
 
-.sh-sticky{
-  flex-shrink:0;padding:8px 20px 14px;
+/* ── × close button ── */
+.modal-close{
+  position:absolute;top:14px;right:14px;z-index:10;
+  width:32px;height:32px;border-radius:50%;
+  background:var(--surface-3);border:1px solid var(--border-hi);
+  color:var(--text-2);font-size:16px;line-height:1;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:background .15s,color .15s,transform .12s;
+}
+.modal-close:hover{background:var(--surface-2);color:var(--text);}
+.modal-close:active{transform:scale(.88);}
+
+/* ── sticky header ── */
+.modal-sticky{
+  flex-shrink:0;padding:18px 52px 14px 20px;
   border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:14px;
 }
-.sh-wnum{font-size:22px;font-weight:800;color:var(--pc,#6366f1);min-width:32px;flex-shrink:0;line-height:1;}
-.sh-wmeta{flex:1;min-width:0;}
-.sh-wtitle{font-size:15px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.3;}
-.sh-wsub{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--text-3);margin-top:3px;}
-
-.sh-tbar{
-  flex-shrink:0;display:flex;padding:0 4px;
-  border-bottom:1px solid var(--border);
+.modal-wnum{
+  font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;
+  color:var(--text-3);margin-bottom:4px;
 }
-.sh-tbar .tbtn{flex:1;text-align:center;padding:11px 4px;min-height:46px;font-size:10px;}
+.modal-wtitle{font-size:16px;font-weight:700;color:var(--text);line-height:1.3;margin-bottom:4px;}
+.modal-wsub{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:var(--text-3);}
 
-.sh-body{
-  flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;
-  overscroll-behavior:contain;padding:16px 18px 28px;
+/* goal band */
+.modal-goal{
+  flex-shrink:0;margin:14px 18px 0;padding:11px 14px 11px 16px;
+  border-left:3px solid var(--pc,var(--accent));
+  border-radius:0 var(--r-inner) var(--r-inner) 0;
+  background:var(--surface-2);font-size:12px;color:var(--text-2);line-height:1.65;
 }
+.modal-glabel{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--pc,var(--accent));margin-bottom:3px;}
 
-.tab-dots{display:flex;justify-content:center;gap:7px;padding:18px 0 4px;}
+/* ── tab bar ── */
+.modal-tbar{flex-shrink:0;display:flex;margin:12px 18px 0;border-bottom:1px solid var(--border);}
+.modal-tbar .tbtn{flex:1;text-align:center;padding:9px 4px;font-size:10px;min-height:40px;}
+
+/* ── scrollable body ── */
+.modal-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:14px 18px 20px;}
+
+/* tab dots */
+.tab-dots{display:flex;justify-content:center;gap:7px;padding:16px 0 4px;}
 .tab-dot{height:5px;width:5px;border-radius:3px;background:var(--border-hi);transition:all .25s cubic-bezier(.4,0,.2,1);}
-.tab-dot.active{width:20px;background:var(--pc,#6366f1);}
+.tab-dot.active{width:20px;background:var(--pc,var(--accent));}
 
 /* ══════════════════════════════════════
    MOBILE OVERRIDES
@@ -489,9 +406,9 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
 @media(max-width:767px){
   #mobile-nav{display:block;}
   .filter-wrap{display:none;}
-  .page{padding:32px 14px calc(88px + env(safe-area-inset-bottom,0));}
-  .header{padding-right:56px;}
-  .week-head{padding:16px 16px;min-height:72px;}
+  .page{padding:32px 14px calc(82px + env(safe-area-inset-bottom,0));}
+  .header{padding-right:62px;}
+  .week-head{padding:16px;min-height:72px;}
   .week-card:hover{transform:none;box-shadow:var(--shadow-sm);}
   .week-card:active{transform:scale(.99);}
   .ckitem{min-height:52px;padding:13px 14px;}
@@ -508,17 +425,13 @@ body.light #mobile-nav{--nav-bg:237,240,248;}
   .tcontent{padding:14px 16px 20px;}
   .wgoal{margin:14px 16px 0;}
 }
-
-@media(min-width:768px){
-  #theme-btn{top:22px;right:22px;}
-}
 </style>
 </head>
 <body>
 
 <button id="theme-btn" onclick="toggleTheme()" title="Toggle light/dark mode">&#9790;</button>
 <div class="page" id="app"></div>
-<div id="sheet-root"></div>
+<div id="modal-root"></div>
 <div id="mobile-nav"></div>
 <div id="toast"><div class="toast-inner" id="toast-text"></div></div>
 
@@ -555,7 +468,6 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Introduction module — first 5 puzzles: encoding, XOR',link:'https://cryptohack.org'}],
    checks:['Can you explain Caesar, Vigenère, and one-time pad ciphers from memory?','Can you compute a modular inverse by hand (e.g. 3 mod 7)?','Did you complete the first 5 CryptoHack Introduction puzzles?']},
-
   {week:2,phase:1,title:'Mathematical & Historical Foundations II',hours:8,
    goal:'Master number theory — modular arithmetic, GCD, Euler\'s theorem — as the foundation for all public-key cryptography.',
    resources:[
@@ -569,7 +481,6 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Math module — all modular arithmetic puzzles',link:'https://cryptohack.org'}],
    checks:['Can you state and apply Euler\'s theorem (a^φ(n) ≡ 1 mod n)?','Can you run the Extended Euclidean Algorithm to find a modular inverse?','Did you finish all CryptoHack Math module puzzles?']},
-
   {week:3,phase:2,title:'Symmetric-Key I — Block Ciphers & AES',hours:9,
    goal:'Understand the internals of AES and why encryption mode choice is a security-critical decision.',
    resources:[
@@ -583,7 +494,6 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Symmetric Cryptography module — AES ECB challenges',link:'https://cryptohack.org'}],
    checks:['Can you describe all four AES round operations from memory?','Can you explain why AES-ECB leaks patterns with a concrete example?','Did you solve at least three CryptoHack AES ECB challenges?']},
-
   {week:4,phase:2,title:'Symmetric-Key II — Modes & Authenticated Encryption',hours:9,
    goal:'Learn to choose the right encryption mode and understand why unauthenticated encryption is insufficient.',
    resources:[
@@ -600,7 +510,6 @@ const W=[
      {source:'Coursera',task:'Weeks 1–2 graded quizzes and programming assignments',link:'https://coursera.org'},
    ],
    checks:['Can you explain why CBC is malleable and how a bit-flipping attack works?','Can you define IND-CPA and give an example cipher that fails it?','Can you explain why GCM provides both confidentiality and authenticity?']},
-
   {week:5,phase:2,title:'Symmetric-Key III — Boneh Deep Dive',hours:10,
    goal:'Complete the symmetric foundation with rigorous security definitions: IND-CPA and IND-CCA.',
    resources:[
@@ -615,7 +524,6 @@ const W=[
      {source:'CryptoHack',task:'Complete remaining Symmetric Cryptography challenges',link:'https://cryptohack.org'},
    ],
    checks:['Can you define IND-CCA and explain why a CPA-secure cipher can fail it?','Can you describe CBC-MAC and its length-extension vulnerability?','Did you complete all Coursera Weeks 3–4 graded assignments?']},
-
   {week:6,phase:3,title:'Asymmetric-Key I — RSA & Number Theory',hours:9,
    goal:'Implement RSA from scratch and understand the number-theoretic hardness that underpins it.',
    resources:[
@@ -628,7 +536,6 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'RSA module — first half: basic RSA, small exponent attacks',link:'https://cryptohack.org'}],
    checks:['Can you generate an RSA key pair by hand for small primes (e.g. p=61, q=53)?','Can you explain why e=3 with no padding is catastrophically insecure?','Can you describe two RSA attacks (Coppersmith, common modulus)?']},
-
   {week:7,phase:3,title:'Asymmetric-Key II — Diffie-Hellman & Discrete Log',hours:9,
    goal:'Understand the hardness assumption behind Diffie-Hellman and why the choice of group is critical.',
    resources:[
@@ -642,7 +549,6 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Diffie-Hellman module — small subgroup & MITM attacks',link:'https://cryptohack.org'}],
    checks:['Can you explain the Decisional Diffie-Hellman (DDH) assumption?','Can you describe a small subgroup confinement attack?','Can you distinguish FFDH from ECDH and say which is preferred today?']},
-
   {week:8,phase:3,title:'Asymmetric-Key III — Elliptic Curve Cryptography',hours:10,
    goal:'Implement point addition and scalar multiplication; understand the ECC vs. RSA key-size trade-off.',
    resources:[
@@ -657,7 +563,6 @@ const W=[
    ],
    practice:[{source:'CryptoHack',task:'Elliptic Curves module — all challenges',link:'https://cryptohack.org'}],
    checks:['Can you perform point addition and scalar multiplication on a small curve by hand?','Can you explain why ECDLP is harder than DLP for the same key size?','Can you describe an ECDSA signature generation and verification end-to-end?']},
-
   {week:9,phase:4,title:'Hashing & Integrity',hours:8,
    goal:'Understand the three hash security properties and why MD5 and SHA-1 are broken.',
    resources:[
@@ -675,7 +580,6 @@ const W=[
      {source:'DIY',task:'Implement SHA-256 from scratch in Python without any libraries',link:''},
    ],
    checks:['Can you distinguish collision resistance, second preimage resistance, and preimage resistance?','Can you explain Merkle-Damgård and its length-extension vulnerability?','Did you implement SHA-256 from scratch without referencing existing code?']},
-
   {week:10,phase:4,title:'Authentication — MAC, HMAC & Digital Signatures',hours:9,
    goal:'Distinguish encryption (confidentiality) from MACs (integrity and authenticity) — a foundational conceptual boundary.',
    resources:[
@@ -692,7 +596,6 @@ const W=[
      {source:'DIY',task:'Implement HMAC-SHA256 and verify a JWT manually in Python without a library',link:''},
    ],
    checks:['Can you explain why H(key||message) is broken but HMAC is not?','Can you describe HMAC\'s double-hashing construction and its security guarantee?','Can you verify an RS256-signed JWT manually in Python without a JWT library?']},
-
   {week:11,phase:5,title:'Applied Cryptography I — Real-World Patterns',hours:9,
    goal:'Bridge theory to code — learn which primitives to actually use in 2025+ applications.',
    resources:[
@@ -705,7 +608,6 @@ const W=[
    ],
    practice:[{source:'cryptography.io',task:'Implement AES-GCM encryption and HMAC verification in Python',link:'https://cryptography.io'}],
    checks:['Can you implement AES-GCM encrypt/decrypt with proper nonce handling in Python?','Can you explain the difference between Fernet and raw AES-GCM (hazmat)?','Can you identify three common cryptographic misuse patterns in real-world code?']},
-
   {week:12,phase:5,title:'Applied Cryptography II — TLS & Protocols',hours:9,
    goal:'Trace the exact cryptographic operations in a TLS 1.3 handshake, byte by byte.',
    resources:[
@@ -718,7 +620,6 @@ const W=[
    ],
    practice:[{source:'DIY',task:'Trace a TLS 1.3 handshake in Wireshark; label each flight with its crypto operation',link:''}],
    checks:['Can you list the full TLS 1.3 message sequence from Client Hello to Finished?','Can you explain what 0-RTT data is and its security trade-off?','Can you identify which cipher suite components handle key exchange, auth, and AEAD?']},
-
   {week:13,phase:5,title:'Applied Cryptography III — Secure Implementation',hours:8,
    goal:'Write production-grade cryptographic code using correct APIs — no raw ECB, no fixed nonces.',
    resources:[
@@ -734,7 +635,6 @@ const W=[
      {source:'DIY',task:'Implement a minimal Certificate Authority with a self-signed chain',link:''},
    ],
    checks:['Can you build an encrypt-then-sign pipeline with proper error handling?','Can you create a self-signed X.509 certificate and verify it programmatically?','Can you audit a code snippet and identify at least two cryptographic flaws?']},
-
   {week:14,phase:6,title:'Cryptanalysis I — Breaking Classical & ECB',hours:10,
    goal:'Shift your mindset from builder to attacker — learn to detect and exploit ECB mode and fixed-key XOR.',
    resources:[
@@ -748,7 +648,6 @@ const W=[
    ],
    practice:[{source:'Cryptopals',task:'Complete all 8 challenges in Set 1 and all 8 in Set 2',link:'https://cryptopals.com'}],
    checks:['Did you break repeating-key XOR (challenge 6) independently without hints?','Can you explain how to detect AES-ECB from a ciphertext corpus without the key?','Did you implement and exploit the PKCS#7 padding oracle in Set 2?']},
-
   {week:15,phase:6,title:'Cryptanalysis II — Padding Oracles & Stream Cipher Reuse',hours:10,
    goal:'Execute a CBC padding oracle attack and a hash length-extension attack from scratch.',
    resources:[
@@ -762,7 +661,6 @@ const W=[
    ],
    practice:[{source:'Cryptopals',task:'Complete all Set 3 challenges (padding oracle is the landmark) and all of Set 4',link:'https://cryptopals.com'}],
    checks:['Can you execute a full CBC padding oracle attack to decrypt an unknown ciphertext?','Can you exploit CTR nonce reuse to recover two plaintext streams?','Can you perform a SHA-1 hash length-extension attack end-to-end?']},
-
   {week:16,phase:6,title:'Cryptanalysis III — RSA & DH Attacks',hours:10,
    goal:'Break RSA with a parity oracle and understand why protocol logic flaws undermine sound primitives.',
    resources:[
@@ -776,7 +674,6 @@ const W=[
    ],
    practice:[{source:'Cryptopals',task:'Complete Set 5 (DH MITM) and as much of Set 6 as possible',link:'https://cryptopals.com'}],
    checks:['Can you mount a DH MITM attack by injecting g=1 or g=p as the parameter?','Can you use an RSA parity oracle to decrypt a ciphertext bit-by-bit?','Can you describe how Bleichenbacher\'s attack works at a conceptual level?']},
-
   {week:17,phase:7,title:'Implementation Security — Timing, RNG & Nonce Misuse',hours:9,
    goal:'Understand that a correct algorithm, incorrectly implemented, is just as broken as a weak one.',
    resources:[
@@ -791,7 +688,6 @@ const W=[
      {source:'DIY',task:'Audit a student-written AES implementation for the five most common misuse patterns',link:''},
    ],
    checks:['Can you write a timing-safe MAC comparison using hmac.compare_digest?','Can you explain nonce misuse resistance and name AEAD schemes that have it?','Can you list the top five cryptographic implementation mistakes from memory?']},
-
   {week:18,phase:7,title:'Implementation Security II & Formal Proofs Intro',hours:9,
    goal:'Begin reading formal security proofs and understand the security reduction paradigm.',
    resources:[
@@ -805,7 +701,6 @@ const W=[
    ],
    practice:[{source:'Coursera',task:'Cryptography II — Weeks 1–2 problem sets',link:'https://coursera.org'}],
    checks:['Can you read a game-based security proof and identify the challenger and adversary?','Can you explain what a security reduction is with a concrete example?','Did you complete the Cryptography II Weeks 1–2 problem sets?']},
-
   {week:19,phase:8,title:'Post-Quantum I — Lattice Mathematics',hours:9,
    goal:'Understand why lattice problems resist quantum attacks and grasp LWE as the foundation of Kyber.',
    resources:[
@@ -822,7 +717,6 @@ const W=[
      {source:'DIY',task:'Write a one-page summary of the CRYSTALS-Kyber algorithm specification',link:''},
    ],
    checks:['Can you define the LWE problem and state its hardness assumption?','Can you explain why lattice-based schemes resist quantum attacks, unlike RSA and ECC?','Did you implement a toy LWE encryption/decryption scheme from scratch?']},
-
   {week:20,phase:8,title:'Post-Quantum II — NIST Standards',hours:9,
    goal:'Know the three NIST-finalized PQC standards, their target security properties, and how to use them.',
    resources:[
@@ -839,7 +733,6 @@ const W=[
      {source:'DIY',task:'Run liboqs in Python: generate a Kyber key pair and complete a full KEM cycle',link:''},
    ],
    checks:['Can you name all three NIST-finalized PQC standards and their security categories?','Can you explain the difference between a KEM and PKE, and why Kyber is a KEM?','Did you run a working Kyber key encapsulation using the liboqs library?']},
-
   {week:21,phase:9,title:'Zero-Knowledge Proofs I — Foundations',hours:9,
    goal:'Explain the three ZKP properties and implement a Sigma protocol from scratch.',
    resources:[
@@ -856,7 +749,6 @@ const W=[
      {source:'DIY',task:'Implement a Schnorr identification proof (interactive) in Python',link:''},
    ],
    checks:['Can you explain completeness, soundness, and zero-knowledge using a non-technical analogy?','Can you implement a Schnorr Sigma protocol for proving knowledge of a discrete log?','Can you distinguish interactive and non-interactive ZK (Fiat-Shamir heuristic)?']},
-
   {week:22,phase:9,title:'Zero-Knowledge Proofs II — zk-SNARKs & Applications',hours:9,
    goal:'Understand SNARKs vs. STARKs and run a complete zk-SNARK circuit end-to-end.',
    resources:[
@@ -873,7 +765,6 @@ const W=[
      {source:'DIY',task:'Write and compile a basic circom circuit proving knowledge of a hash preimage',link:''},
    ],
    checks:['Can you explain what a QAP is and why it matters for SNARKs?','Can you describe Groth16\'s trusted setup requirement and its trust implications?','Did you compile and verify a circom circuit that proves a non-trivial ZK statement?']},
-
   {week:23,phase:10,title:'Formal Proofs & Security Reductions',hours:10,
    goal:'Read and write game-based security reductions; understand the Random Oracle Model.',
    resources:[
@@ -889,7 +780,6 @@ const W=[
      {source:'DIY',task:'Write a formal game-based security proof for a simple MAC construction',link:''},
    ],
    checks:['Can you read a formal security proof and identify the reduction\'s simulator?','Can you explain the Random Oracle Model vs. the standard model?','Can you write a game-based proof independently, without referencing an example?']},
-
   {week:24,phase:10,title:'Key Management, PKI & Capstone Project',hours:8,
    goal:'Synthesise all 24 weeks into a working system and understand the operational side of cryptography.',
    resources:[
@@ -908,10 +798,10 @@ const W=[
 ];
 
 /* ══════════════════════════════════════
-   STATE & PERSISTENCE
+   STATE
 ══════════════════════════════════════ */
-const LS='cmp-v6', LSP='cmp-v6-pdfs';
-let S={expanded:null,filter:0,checks:{},notes:{},pdfs:{},tabs:{},costOpen:false,sheetWeek:null};
+const LS='cmp-v7',LSP='cmp-v7-pdfs';
+let S={expanded:null,filter:0,checks:{},notes:{},pdfs:{},tabs:{},costOpen:false,modalWeek:null};
 
 function loadState(){
   try{const r=localStorage.getItem(LS);if(r)S={...S,...JSON.parse(r)};}catch(e){}
@@ -927,20 +817,14 @@ function saveState(){
 ══════════════════════════════════════ */
 let isDark=true;
 function initTheme(){
-  const saved=localStorage.getItem('cmp-theme');
-  isDark = saved ? saved==='dark' : true;
-  applyTheme();
+  const s=localStorage.getItem('cmp-theme');isDark=s?s==='dark':true;applyTheme();
 }
 function applyTheme(){
   document.body.classList.toggle('light',!isDark);
   const btn=document.getElementById('theme-btn');
-  if(btn) btn.innerHTML=isDark?'&#9790;':'&#9788;';
+  if(btn)btn.innerHTML=isDark?'&#9790;':'&#9788;';
 }
-function toggleTheme(){
-  isDark=!isDark;
-  localStorage.setItem('cmp-theme',isDark?'dark':'light');
-  applyTheme();
-}
+function toggleTheme(){isDark=!isDark;localStorage.setItem('cmp-theme',isDark?'dark':'light');applyTheme();}
 
 /* ══════════════════════════════════════
    MOBILE DETECTION
@@ -948,7 +832,7 @@ function toggleTheme(){
 let isMobile=window.innerWidth<768;
 window.addEventListener('resize',()=>{
   const was=isMobile;isMobile=window.innerWidth<768;
-  if(was!==isMobile){S.sheetWeek=null;S.expanded=null;render();}
+  if(was!==isMobile){S.modalWeek=null;S.expanded=null;document.body.classList.remove('modal-open');render();}
 },{passive:true});
 
 /* ══════════════════════════════════════
@@ -991,7 +875,6 @@ function openPdf(bk){
 ══════════════════════════════════════ */
 let _tt=null;
 function showToast(msg){
-  if(!isMobile)return;
   const t=document.getElementById('toast'),tx=document.getElementById('toast-text');
   if(!t||!tx)return;
   tx.textContent=msg;t.classList.add('show');
@@ -999,7 +882,7 @@ function showToast(msg){
 }
 
 /* ══════════════════════════════════════
-   CONTENT RENDERERS
+   CONTENT RENDERERS (shared)
 ══════════════════════════════════════ */
 function renderResources(w){
   const items=w.resources.map(r=>{
@@ -1089,14 +972,14 @@ function tabContent(w,tab){
 }
 
 /* ══════════════════════════════════════
-   DESKTOP RENDER
+   DESKTOP CARD RENDER
 ══════════════════════════════════════ */
 function renderCard(w){
   const ph=phOf(w.week),{s,t}=getScore(w.week),info=lvInfo(s,t);
   const done=s===t&&t>0,open=!isMobile&&S.expanded===w.week;
   const hidden=S.filter!==0&&S.filter!==w.phase;
   const tab=S.tabs[w.week]||'resources';
-  const fn=isMobile?`openSheet(${w.week})`:`toggleWeek(${w.week})`;
+  const fn=isMobile?`openModal(${w.week})`:`toggleWeek(${w.week})`;
   return`
   <div class="week-card ${open?'open':''} ${done?'mastered':''} ${hidden?'hidden':''}"
        id="wc-${w.week}" data-phase="${w.phase}" style="--pc:${ph.color}">
@@ -1123,6 +1006,9 @@ function renderCard(w){
   </div>`;
 }
 
+/* ══════════════════════════════════════
+   MAIN PAGE RENDER
+══════════════════════════════════════ */
 function render(){
   const m=masteredCount(),h=W.reduce((a,w)=>a+w.hours,0);
   document.getElementById('app').innerHTML=`
@@ -1168,7 +1054,7 @@ function render(){
 }
 
 /* ══════════════════════════════════════
-   MOBILE NAV — initial render only
+   MOBILE NAV — in-place DOM update
 ══════════════════════════════════════ */
 function renderMobileNav(){
   document.getElementById('mobile-nav').innerHTML=`
@@ -1179,139 +1065,101 @@ function renderMobileNav(){
 }
 
 /* ══════════════════════════════════════
-   SHEET RENDER
+   CENTERED MODAL — OPEN
 ══════════════════════════════════════ */
-function renderSheet(animate){
-  const root=document.getElementById('sheet-root');
-  if(!S.sheetWeek){root.innerHTML='';return;}
-  const w=W.find(x=>x.week===S.sheetWeek),ph=phOf(w.week);
-  const tab=S.tabs[w.week]||'resources';
-  root.innerHTML=`
-    <div class="sh-overlay" onclick="closeSheet()"></div>
-    <div class="sheet" id="ms" style="--pc:${ph.color}">
-      <div class="sh-handle-area"><div class="sh-handle-bar"></div></div>
-      <div class="sh-sticky">
-        <div class="sh-wnum">${String(w.week).padStart(2,'0')}</div>
-        <div class="sh-wmeta">
-          <div class="sh-wtitle">${esc(w.title)}</div>
-          <div class="sh-wsub">${ph.label} · ${w.hours}h</div>
-        </div>
-      </div>
-      <div class="sh-tbar" id="sh-tbar">
-        ${TAB_ORDER.map((id,i)=>`<button class="tbtn ${tab===id?'active':''}" onclick="mSwitchTab(${w.week},'${id}')">${TAB_LABELS[i]}</button>`).join('')}
-      </div>
-      <div class="sh-body" id="sh-body">
-        <div class="wgoal" style="margin:0 0 14px"><div class="glabel">Weekly Goal</div>${esc(w.goal)}</div>
-        ${tabContent(w,tab)}
-        <div class="tab-dots">${TAB_ORDER.map(id=>`<div class="tab-dot ${tab===id?'active':''}"></div>`).join('')}</div>
-      </div>
-    </div>`;
-
-  if(animate){
-    const sh=document.getElementById('ms');
-    if(sh){
-      sh.style.transform='translateY(108%)';
-      requestAnimationFrame(()=>requestAnimationFrame(()=>{
-        sh.style.transition='transform .44s cubic-bezier(0.22,1,0.36,1)';
-        sh.style.transform='translateY(0)';
-        sh.addEventListener('transitionend',()=>{sh.style.transition='';},{once:true});
-      }));
-    }
-  }
-  requestAnimationFrame(()=>attachGestures());
+function openModal(wn){
+  if(!S.tabs[wn])S.tabs[wn]='resources';
+  S.modalWeek=wn;saveState();
+  /* Lock page scroll — prevents background moving with finger */
+  document.body.classList.add('modal-open');
+  renderModal();
 }
 
-function updateSheetBody(){
-  const body=document.getElementById('sh-body');
-  if(!body||!S.sheetWeek)return;
-  const w=W.find(x=>x.week===S.sheetWeek);
+function closeModal(){
+  S.modalWeek=null;saveState();
+  document.body.classList.remove('modal-open');
+  document.getElementById('modal-root').innerHTML='';
+  /* refresh cards to show any updated mastered state */
+  updateProgressBar();
+  /* re-render just the card that was open */
+  if(S.modalWeek!==null){
+    const w=W.find(x=>x.week===S.modalWeek);
+    if(w)updateCardInList(w.week);
+  }
+  /* full list card refresh for mastered badge */
+  W.forEach(w=>updateCardInList(w.week));
+}
+
+function renderModal(){
+  const root=document.getElementById('modal-root');
+  if(!S.modalWeek){root.innerHTML='';return;}
+  const w=W.find(x=>x.week===S.modalWeek),ph=phOf(w.week);
+  const tab=S.tabs[w.week]||'resources';
+  root.innerHTML=`
+    <div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+      <div class="modal-card" id="modal-card" style="--pc:${ph.color}" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeModal()" title="Close">&#10005;</button>
+        <div class="modal-sticky">
+          <div class="modal-wnum">Week ${String(w.week).padStart(2,'0')} &nbsp;·&nbsp; ${ph.label} &nbsp;·&nbsp; ${w.hours}h</div>
+          <div class="modal-wtitle">${esc(w.title)}</div>
+        </div>
+        <div class="modal-goal"><div class="modal-glabel">Weekly Goal</div>${esc(w.goal)}</div>
+        <div class="modal-tbar" id="modal-tbar">
+          ${TAB_ORDER.map((id,i)=>`<button class="tbtn ${tab===id?'active':''}" onclick="mSwitchTab(${w.week},'${id}')">${TAB_LABELS[i]}</button>`).join('')}
+        </div>
+        <div class="modal-body" id="modal-body">
+          ${tabContent(w,tab)}
+          <div class="tab-dots">${TAB_ORDER.map(id=>`<div class="tab-dot ${tab===id?'active':''}"></div>`).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+  requestAnimationFrame(()=>attachSwipe());
+}
+
+/* Clicking the blurred overlay outside the card closes the modal */
+function handleOverlayClick(e){
+  if(e.target.id==='modal-overlay')closeModal();
+}
+
+function updateModalBody(){
+  const body=document.getElementById('modal-body');
+  if(!body||!S.modalWeek)return;
+  const w=W.find(x=>x.week===S.modalWeek);
   const tab=S.tabs[w.week]||'resources';
   body.innerHTML=`
-    <div class="wgoal" style="margin:0 0 14px"><div class="glabel">Weekly Goal</div>${esc(w.goal)}</div>
     ${tabContent(w,tab)}
     <div class="tab-dots">${TAB_ORDER.map(id=>`<div class="tab-dot ${tab===id?'active':''}"></div>`).join('')}</div>`;
   body.scrollTop=0;
 }
 
 /* ══════════════════════════════════════
-   UNIFIED GESTURE SYSTEM — NO DIAGONALS
-   Single state machine; one direction per touch session.
-   pull-to-close: fires when at top AND dragging down.
-   swipe-tabs: fires when strictly horizontal.
+   SWIPE TABS inside modal
+   Strict direction lock — no diagonals
 ══════════════════════════════════════ */
-function attachGestures(){
-  const sh=document.getElementById('ms');
-  const body=document.getElementById('sh-body');
-  if(!sh||!body)return;
-
-  /* g.dir: 'idle' → 'deciding' → 'v' (vertical) | 'h' (horizontal) */
-  let g={dir:'idle',sx:0,sy:0,dy:0};
-
-  sh.addEventListener('touchstart',e=>{
-    g.dir='deciding';
-    g.sx=e.touches[0].clientX;
-    g.sy=e.touches[0].clientY;
-    g.dy=0;
-    sh.style.transition='none';
+function attachSwipe(){
+  const body=document.getElementById('modal-body');
+  if(!body)return;
+  let g={dir:'idle',sx:0,sy:0};
+  body.addEventListener('touchstart',e=>{
+    g.dir='deciding';g.sx=e.touches[0].clientX;g.sy=e.touches[0].clientY;
   },{passive:true});
-
-  sh.addEventListener('touchmove',e=>{
-    if(g.dir==='idle')return;
-    const dx=e.touches[0].clientX-g.sx;
-    const dy=e.touches[0].clientY-g.sy;
-
-    /* — Direction lock: decide on first 10px of movement — */
+  body.addEventListener('touchmove',e=>{
+    if(g.dir==='vertical'||g.dir==='idle')return;
+    const dx=e.touches[0].clientX-g.sx,dy=e.touches[0].clientY-g.sy;
     if(g.dir==='deciding'){
-      if(Math.abs(dx)>10||Math.abs(dy)>10){
-        /* Strict ratio: horizontal needs to be 1.8× stronger than vertical */
-        g.dir=Math.abs(dx)>Math.abs(dy)*1.8?'h':'v';
-      }
+      if(Math.abs(dx)>10||Math.abs(dy)>10)
+        g.dir=Math.abs(dx)>Math.abs(dy)*1.8?'horizontal':'vertical';
       return;
     }
-
-    /* — HORIZONTAL: swipe tabs — */
-    if(g.dir==='h'){
-      e.preventDefault(); /* block scroll */
-    }
-
-    /* — VERTICAL: pull-to-close only when at scroll top AND dragging down — */
-    if(g.dir==='v'){
-      if(body.scrollTop<=0 && dy>0){
-        g.dy=dy;
-        /* Linear-ish resistance: 0.85 factor feels natural */
-        sh.style.transform=`translateY(${dy*0.85}px)`;
-        e.preventDefault();
-      }
-      /* else: let native scroll run — do NOT preventDefault */
-    }
+    if(g.dir==='horizontal')e.preventDefault();
   },{passive:false});
-
-  sh.addEventListener('touchend',e=>{
-    if(g.dir==='h'){
-      const dx=e.changedTouches[0].clientX-g.sx;
-      if(Math.abs(dx)>=50){
-        const cur=S.tabs[S.sheetWeek]||'resources';
-        const idx=TAB_ORDER.indexOf(cur);
-        if(dx<0&&idx<TAB_ORDER.length-1) mSwitchTab(S.sheetWeek,TAB_ORDER[idx+1]);
-        else if(dx>0&&idx>0) mSwitchTab(S.sheetWeek,TAB_ORDER[idx-1]);
-      }
-    }
-
-    if(g.dir==='v' && g.dy>0){
-      sh.style.transition='transform .33s cubic-bezier(.4,0,.2,1)';
-      if(g.dy>75){
-        sh.style.transform='translateY(110%)';
-        setTimeout(closeSheet,340);
-      }else{
-        sh.style.transform='translateY(0)';
-        sh.addEventListener('transitionend',()=>{sh.style.transition='';},{once:true});
-      }
-    }else if(g.dir==='v'){
-      /* ensure sheet stays in place if we never triggered pull */
-      sh.style.transform='translateY(0)';
-    }
-
-    g.dir='idle';
+  body.addEventListener('touchend',e=>{
+    if(g.dir!=='horizontal'){g.dir='idle';return;}
+    const dx=e.changedTouches[0].clientX-g.sx;g.dir='idle';
+    if(Math.abs(dx)<50)return;
+    const cur=S.tabs[S.modalWeek]||'resources',idx=TAB_ORDER.indexOf(cur);
+    if(dx<0&&idx<TAB_ORDER.length-1)mSwitchTab(S.modalWeek,TAB_ORDER[idx+1]);
+    else if(dx>0&&idx>0)mSwitchTab(S.modalWeek,TAB_ORDER[idx-1]);
   },{passive:true});
 }
 
@@ -1319,93 +1167,64 @@ function attachGestures(){
    ACTIONS
 ══════════════════════════════════════ */
 function toggleWeek(n){
-  if(isMobile){openSheet(n);return;}
+  if(isMobile){openModal(n);return;}
   S.expanded=S.expanded===n?null:n;
   if(!S.tabs[n])S.tabs[n]='resources';
   saveState();render();
-  if(S.expanded===n) setTimeout(()=>document.getElementById('wc-'+n)?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
+  if(S.expanded===n)setTimeout(()=>document.getElementById('wc-'+n)?.scrollIntoView({behavior:'smooth',block:'nearest'}),50);
 }
 
 function switchTab(wn,t){S.tabs[wn]=t;saveState();render();}
 
 function mSwitchTab(wn,t){
   S.tabs[wn]=t;saveState();
-  document.querySelectorAll('#sh-tbar .tbtn').forEach((btn,i)=>btn.classList.toggle('active',TAB_ORDER[i]===t));
-  updateSheetBody();
+  document.querySelectorAll('#modal-tbar .tbtn').forEach((btn,i)=>btn.classList.toggle('active',TAB_ORDER[i]===t));
+  updateModalBody();
 }
 
-function openSheet(wn){
-  if(!S.tabs[wn])S.tabs[wn]='resources';
-  S.sheetWeek=wn;saveState();renderSheet(true);
-}
-
-function closeSheet(){
-  S.sheetWeek=null;saveState();
-  document.getElementById('sheet-root').innerHTML='';
-  render();
-}
-
-/* ── FIX: setFilter does NOT re-render nav → no scroll jump ── */
+/* ── setFilter — NO re-render, just DOM patches (no nav scroll jump) ── */
 function setFilter(id){
   S.filter=id;saveState();
-
-  /* Update pill active states in-place — no scroll reset */
-  document.querySelectorAll('[data-id]').forEach(el=>{
-    el.classList.toggle('active',+el.dataset.id===id);
-  });
-
-  /* Show/hide cards in-place */
-  document.querySelectorAll('.week-card[data-phase]').forEach(card=>{
-    const ph=+card.dataset.phase;
-    card.classList.toggle('hidden',id!==0&&ph!==id);
-  });
+  document.querySelectorAll('[data-id]').forEach(el=>el.classList.toggle('active',+el.dataset.id===id));
+  document.querySelectorAll('.week-card[data-phase]').forEach(card=>card.classList.toggle('hidden',id!==0&&+card.dataset.phase!==id));
 }
 
 function toggleCost(){S.costOpen=!S.costOpen;saveState();render();}
 
-/* ── FIX: mastered note synced with actual check state ── */
+/* ── toggleCheck — mastered note appears AND disappears reactively ── */
 function toggleCheck(wn,qi){
-  const key=`${wn}-${qi}`;
-  S.checks[key]=!S.checks[key];
-  saveState();
+  const key=`${wn}-${qi}`;S.checks[key]=!S.checks[key];saveState();
 
-  if(isMobile&&S.sheetWeek===wn){
-    /* 1. Toggle check item class */
+  if(S.modalWeek===wn){
+    /* DOM-patch check item */
     const item=document.querySelector(`[data-wn="${wn}"][data-qi="${qi}"]`);
     if(item){
       item.classList.toggle('on',!!S.checks[key]);
       const box=item.querySelector('.ckbox');
-      if(box){box.classList.remove('pop');void box.offsetWidth;box.classList.add('pop');
+      if(box){box.classList.remove('pop');void box.offsetWidth;
+        box.classList.add('pop');
         box.addEventListener('animationend',()=>box.classList.remove('pop'),{once:true});}
     }
-    /* 2. Update badge */
-    const{s,t}=getScore(wn);const info=lvInfo(s,t);
+    /* Patch level badge */
+    const{s,t}=getScore(wn),info=lvInfo(s,t);
     const ln=document.querySelector('.lvname');
     const lf=document.querySelector('.lvfrac');
     const lb=document.querySelector('.lvbar');
     if(ln){ln.textContent=info.l;ln.style.color=info.c;}
     if(lf)lf.innerHTML=`${s}<small>/${t}</small>`;
     if(lb){lb.style.width=`${t?s/t*100:0}%`;lb.style.background=info.c;}
-
-    /* 3. ── FIX: mastered note appears AND disappears reactively ── */
-    const done=s===t&&t>0;
-    const existing=document.querySelector('.mastered-note');
+    /* Mastered note — reactive add/remove */
+    const done=s===t&&t>0,existing=document.querySelector('.mastered-note');
     if(done&&!existing){
       const ck=document.querySelector('.cklist');
       if(ck){const el=document.createElement('div');el.className='mastered-note';
         el.textContent=`Week ${wn} complete — ready to advance.`;
         ck.insertAdjacentElement('afterend',el);}
       showToast('Week '+wn+' mastered');
-    }else if(!done&&existing){
-      existing.remove();
-    }
-
-    /* 4. Update list card + progress bar */
-    updateCardInList(wn);
-    updateProgressBar();
-  }else{
-    render();
-  }
+    }else if(!done&&existing){existing.remove();}
+    /* Update list behind */
+    updateCardInList(wn);updateProgressBar();
+  }else{render();}
 }
 
 function saveNote(wn,v){
@@ -1414,25 +1233,24 @@ function saveNote(wn,v){
 }
 function clearNote(wn){
   S.notes[wn]='';saveState();
-  if(isMobile&&S.sheetWeek===wn)updateSheetBody();else render();
+  if(S.modalWeek===wn)updateModalBody();else render();
 }
 function triggerUpload(bk){document.getElementById('fi-'+bk)?.click();}
 function handleUpload(bk,inp){
   const f=inp.files[0];if(!f)return;
   const r=new FileReader();
   r.onload=e=>{S.pdfs[bk]={name:f.name,url:e.target.result};saveState();
-    if(isMobile&&S.sheetWeek)updateSheetBody();else render();};
+    if(S.modalWeek)updateModalBody();else render();};
   r.readAsDataURL(f);
 }
 function removePdf(bk){
   delete S.pdfs[bk];saveState();
-  if(isMobile&&S.sheetWeek)updateSheetBody();else render();
+  if(S.modalWeek)updateModalBody();else render();
 }
 
 function updateCardInList(wn){
   const el=document.getElementById('wc-'+wn);if(!el)return;
-  const w=W.find(x=>x.week===wn);
-  const div=document.createElement('div');div.innerHTML=renderCard(w);
+  const div=document.createElement('div');div.innerHTML=renderCard(W.find(x=>x.week===wn));
   el.replaceWith(div.firstElementChild);
 }
 function updateProgressBar(){
@@ -1448,9 +1266,7 @@ function updateProgressBar(){
 /* ══════════════════════════════════════
    BOOT
 ══════════════════════════════════════ */
-loadState();
-initTheme();
-render();
+loadState();initTheme();render();
 </script>
 </body>
 </html>
